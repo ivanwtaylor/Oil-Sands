@@ -1,0 +1,905 @@
+{UTF-8}
+drilling=
+	(Oil Reserves/INITIAL OIL RESERVES)*Drilling Workforce*PRODUCTIVITY DRILLING
+	~	barrels/Year
+	~		|
+
+total processing=
+	domestic processing+foreign processing
+	~	barrels/Year
+	~		|
+
+desired mining workforce=
+	(total processing+extracted oil correction)*fraction mining/PRODUCTIVITY MINING
+	~	people
+	~		|
+
+desired drilling workforce=
+	(total processing+extracted oil correction)*fraction drilling/PRODUCTIVITY DRILLING
+	~	people
+	~		|
+
+mining=
+	(Oil Reserves/INITIAL OIL RESERVES)*Mining Workforce*PRODUCTIVITY MINING
+	~	barrels/Year
+	~		|
+
+shipping=
+	PRODUCTIVITY SHIPPING*Shipping Workforce*(Processed Oil/INITIAL PROCESSED OIL)
+	~	barrels/Year
+	~		|
+
+domestic processing=
+	PRODUCTIVITY PROCESSING*Processing Workforce*(Extracted Oil/INITIAL EXTRACTED OIL)
+	~	barrels/Year
+	~		|
+
+selling=
+	Oil Demand*(Oil Available for Market/INITIAL OIL AVAILABLE FOR MARKET)
+	~	barrels/Year
+	~		|
+
+drilling emissions=
+	drilling*EMISSIONS PER BARREL DRILLED
+	~	megatonnes/Year
+	~		|
+
+change in oil demand=
+	(OIL DEMAND INCREASE RATE-Oil Demand)/TIME TO CHANGE OIL DEMAND
+	~	(barrels/Year)/Year
+	~		|
+
+water for drilling=
+	drilling*WATER REQUIRED PER BARREL DRILLED
+	~	meters cubed/Year
+	~		|
+
+Oil Reserves= INTEG (
+	-drilling-mining,
+		INITIAL OIL RESERVES)
+	~	barrels
+	~		|
+
+OIL DEMAND INCREASE RATE=
+	Demand Table(Time/year)*THOUSANDS
+	~	barrels/Year
+	~		|
+
+Extracted Oil= INTEG (
+	drilling+mining-domestic processing-foreign processing,
+		INITIAL EXTRACTED OIL)
+	~	barrels
+	~		|
+
+extraction=
+	drilling+mining
+	~	barrels/Year
+	~		|
+
+INITIAL OIL AVAILABLE FOR MARKET=
+	1e+009
+	~	barrels
+	~		|
+
+DESIRED EXTRACTED OIL=
+	1e+009
+	~	barrels
+	~		|
+
+DESIRED OIL AVAILABLE FOR MARKET=
+	1e+009
+	~	barrels
+	~		|
+
+DESIRED PROCESSED OIL=
+	1e+009
+	~	barrels
+	~		|
+
+total jobs=
+	direct jobs+indirect jobs
+	~	people
+	~		|
+
+INITIAL EXTRACTED OIL=
+	1e+009
+	~	barrels
+	~		|
+
+INITIAL PROCESSED OIL=
+	1e+009
+	~	barrels
+	~		|
+
+indirect jobs=
+	direct jobs*INDIRECT JOBS MULTIPLIER
+	~	people
+	~		|
+
+foreign processing=
+	domestic processing/(1-FOREIGN PROCESSING FRACTION)-domestic processing
+	~	barrels/Year
+	~		|
+
+year=
+	1
+	~	Year
+	~		|
+
+TOTAL JOBS STATS 2018=
+	205000
+	~	people
+	~		|
+
+water use=
+	(Water Available/INITIAL WATER AVAILABLE)*(water for drilling+water for mining-water for drilling\
+		*RECYCLING FRACTION DRILLING-water for mining*RECYCLING FRACTION MINING)
+	~	meters cubed/Year
+	~		|
+
+Demand Table(
+	[(0,0)-(30,4000)],(0,1126),(1,1277),(2,1432),(3,1633),(4,1916),(5,2229),(6,2373),(7,\
+		2603),(8,2979),(10,100),(30,3000))
+	~	dmnl
+	~		|
+
+mining emissions=
+	mining*EMISSIONS PER BARREL MINED
+	~	megatonnes/Year
+	~		|
+
+THOUSANDS=
+	1000*365
+	~	barrels/Year
+	~		|
+
+net land used=
+	(Land Available/INITIAL LAND AVAILABLE)*mining*LAND REQUIRED PER BARREL MINED-Land Used\
+		/TIME TO RECLAIM LAND
+	~	kilometers squared/Year
+	~		|
+
+Oil Demand= INTEG (
+	change in oil demand,
+		INITIAL OIL DEMAND)
+	~	barrels/Year
+	~		|
+
+Water Used= INTEG (
+	water use,
+		INITIAL TAILINGS)
+	~	meters cubed
+	~		|
+
+Water Available= INTEG (
+	-water use,
+		INITIAL WATER AVAILABLE)
+	~	meters cubed
+	~		|
+
+INITIAL TAILINGS=
+	0
+	~	meters cubed
+	~		|
+
+water for mining=
+	mining*WATER REQUIRED PER BARREL MINED
+	~	meters cubed/Year
+	~		|
+
+CANADIAN EMISSIONS=
+	729
+	~	megatonnes/Year
+	~		|
+
+direct jobs=
+	Drilling Workforce+Processing Workforce+Shipping Workforce+Mining Workforce
+	~	people
+	~		|
+
+emissions=
+	drilling emissions+mining emissions+processing emissions+shipping emissions
+	~	megatonnes/Year
+	~		|
+
+EMISSIONS PER BARREL DRILLED=
+	5e-010
+	~	megatonnes/barrels
+	~		|
+
+EMISSIONS PER BARREL MINED=
+	5e-010
+	~	megatonnes/barrels
+	~		|
+
+EMISSIONS PER BARREL PROCESSED=
+	5e-010
+	~	megatonnes/barrels
+	~		|
+
+EMISSIONS PER BARREL SHIPPED=
+	5e-010
+	~	megatonnes/barrels
+	~		|
+
+FOREIGN PROCESSING FRACTION=
+	0.6
+	~	fraction
+	~		|
+
+fraction drilling=
+	1-fraction mining
+	~	fraction
+	~		|
+
+fraction mining=
+	0.2
+	~	fraction
+	~		|
+
+FRACTION OF OIL SANDS EMISSIONS=
+	0.1
+	~	fraction
+	~		|
+
+Green House Gases= INTEG (
+	emissions,
+		INITIAL GREEN HOUSE GASES)
+	~	megatonnes
+	~		|
+
+shipping emissions=
+	shipping*EMISSIONS PER BARREL SHIPPED
+	~	megatonnes/Year
+	~		|
+
+hiring and laying off mining personnel=
+	(desired mining workforce-Mining Workforce)/TIME TO HIRE OR LAY OFF MINING PERSONNEL
+	~	people/Year
+	~		|
+
+Mining Workforce= INTEG (
+	hiring and laying off mining personnel,
+		INITIAL MINING WORKFORCE)
+	~	people
+	~		|
+
+INDIRECT JOBS MULTIPLIER=
+	2.5
+	~	dmnl
+	~		|
+
+INITIAL GREEN HOUSE GASES=
+	0
+	~	megatonnes
+	~		|
+
+INITIAL LAND AVAILABLE=
+	4800
+	~	kilometers squared
+	~		|
+
+INITIAL LAND USED=
+	700
+	~	kilometers squared
+	~		|
+
+INITIAL MINING WORKFORCE=
+	10000
+	~	people
+	~		|
+
+INITIAL OIL DEMAND=
+	1.126e+006*365
+	~	barrels/Year
+	~		|
+
+processing emissions=
+	domestic processing*EMISSIONS PER BARREL PROCESSED
+	~	megatonnes/Year
+	~		|
+
+INITIAL WATER AVAILABLE=
+	2.63e+018
+	~	meters cubed
+	~		|
+
+Land Available= INTEG (
+	-net land used,
+		INITIAL LAND AVAILABLE)
+	~	kilometers squared
+	~		|
+
+LAND REQUIRED PER BARREL MINED=
+	1e-007
+	~	kilometers squared/barrels
+	~		|
+
+Land Used= INTEG (
+	net land used,
+		INITIAL LAND USED)
+	~	kilometers squared
+	~		|
+
+TIME TO CHANGE OIL DEMAND=
+	0.2
+	~	years
+	~		|
+
+RECYCLING FRACTION DRILLING=
+	0.86
+	~	fraction
+	~		|
+
+oil sands emissions 2018=
+	CANADIAN EMISSIONS*FRACTION OF OIL SANDS EMISSIONS
+	~	megatonnes/Year
+	~		|
+
+WATER REQUIRED PER BARREL MINED=
+	2.6
+	~	meters cubed/barrels
+	~		|
+
+TIME TO HIRE OR LAY OFF MINING PERSONNEL=
+	1
+	~	years
+	~		|
+
+TIME TO RECLAIM LAND=
+	60
+	~	years
+	~		|
+
+PRODUCTIVITY MINING=
+	17500
+	~	(barrels/Year)/person
+	~		|
+
+WATER REQUIRED PER BARREL DRILLED=
+	0.2
+	~	meters cubed/barrels
+	~		|
+
+RECYCLING FRACTION MINING=
+	0.75
+	~	fraction
+	~		|
+
+desired processing workforce=
+	(shipping+processed oil correction)/PRODUCTIVITY PROCESSING
+	~	people
+	~		|
+
+desired shipping worforce=
+	(selling+market oil correction)/PRODUCTIVITY SHIPPING
+	~	people
+	~		|
+
+extracted oil correction=
+	MAX(0, (DESIRED EXTRACTED OIL-Extracted Oil)/TIME TO CORRECT EXTRACTED OIL)
+	~	barrels/Year
+	~		|
+
+Drilling Workforce= INTEG (
+	hiring and laying off drilling personnel,
+		INITIAL DRILLING WORKFORCE)
+	~	people
+	~		|
+
+hiring and laying off drilling personnel=
+	(desired drilling workforce-Drilling Workforce)/TIME TO HIRE OR LAY OFF DRILLING PERSONNEL
+	~	people/Year
+	~		|
+
+hiring and laying off processing personnel=
+	(desired processing workforce-Processing Workforce)/TIME TO HIRE AND LAY OFF PROCESSING PERSONNEL
+	~	people/Year
+	~		|
+
+hiring and laying off shipping personnel=
+	(desired shipping worforce-Shipping Workforce)/TIME TO HIRE OR LAY OFF SHIPPING PERSONNEL
+	~	people/Year
+	~		|
+
+INITIAL DRILLING WORKFORCE=
+	50000
+	~	people
+	~		|
+
+INITIAL OIL RESERVES=
+	1.65e+011
+	~	barrels
+	~		|
+
+INITIAL PROCESSING WORKFORCE=
+	50000
+	~	people
+	~		|
+
+INITIAL SHIPPING WORKFORCE=
+	40000
+	~	people
+	~		|
+
+market oil correction=
+	MAX(0, (DESIRED OIL AVAILABLE FOR MARKET-Oil Available for Market)/TIME TO CORRECT MARKET OIL\
+		)
+	~	barrels/Year
+	~		|
+
+Oil Available for Market= INTEG (
+	shipping-selling,
+		INITIAL OIL AVAILABLE FOR MARKET)
+	~	barrels
+	~		|
+
+Processed Oil= INTEG (
+	domestic processing-shipping,
+		INITIAL PROCESSED OIL)
+	~	barrels
+	~		|
+
+processed oil correction=
+	MAX(0, (DESIRED PROCESSED OIL-Processed Oil)/TIME TO CORRECT PROCESSED OIL)
+	~	barrels/Year
+	~		|
+
+Processing Workforce= INTEG (
+	hiring and laying off processing personnel,
+		INITIAL PROCESSING WORKFORCE)
+	~	people
+	~		|
+
+PRODUCTIVITY DRILLING=
+	17500
+	~	(barrels/Year)/person
+	~		|
+
+PRODUCTIVITY PROCESSING=
+	17500
+	~	(barrels/Year)/person
+	~		|
+
+PRODUCTIVITY SHIPPING=
+	17500
+	~	(barrels/Year)/person
+	~		|
+
+Shipping Workforce= INTEG (
+	hiring and laying off shipping personnel,
+		INITIAL SHIPPING WORKFORCE)
+	~	people
+	~		|
+
+TIME TO CORRECT EXTRACTED OIL=
+	3/12
+	~	years
+	~		|
+
+TIME TO CORRECT MARKET OIL=
+	1/12
+	~	years
+	~		|
+
+TIME TO CORRECT PROCESSED OIL=
+	1/12
+	~	years
+	~		|
+
+TIME TO HIRE AND LAY OFF PROCESSING PERSONNEL=
+	1
+	~	years
+	~		|
+
+TIME TO HIRE OR LAY OFF DRILLING PERSONNEL=
+	1
+	~	years
+	~		|
+
+TIME TO HIRE OR LAY OFF SHIPPING PERSONNEL=
+	1
+	~	years
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 20
+	~	Year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 0.125
+	~	Year [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.0078125
+	~	Year [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Oil Production
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Oil Reserves,110,211,53,53,3,131,0,0,0,0,0,0
+10,2,Extracted Oil,426,211,53,52,3,131,0,0,0,0,0,0
+10,3,Processed Oil,690,201,54,45,3,131,0,0,0,0,0,0
+10,4,Oil Available for Market,947,200,51,46,3,131,0,0,0,0,0,0
+1,5,7,3,4,0,0,22,0,0,0,-1--1--1,,1|(598,208)|
+1,6,7,2,100,0,0,22,0,0,0,-1--1--1,,1|(513,208)|
+11,7,620,554,208,6,8,34,3,0,0,1,0,0,0
+10,8,domestic processing,554,238,60,22,40,131,0,0,-1,0,0,0
+1,9,11,4,4,0,0,22,0,0,0,-1--1--1,,1|(861,206)|
+1,10,11,3,100,0,0,22,0,0,0,-1--1--1,,1|(779,206)|
+11,11,268,821,206,6,8,34,3,0,0,1,0,0,0
+10,12,shipping,821,225,27,11,40,3,0,0,-1,0,0,0
+12,13,48,1156,194,10,8,0,3,0,0,-1,0,0,0
+1,14,16,13,4,0,0,22,0,0,0,-1--1--1,,1|(1109,195)|
+1,15,16,4,100,0,0,22,0,0,0,-1--1--1,,1|(1029,195)|
+11,16,48,1066,195,6,8,34,3,0,0,1,0,0,0
+10,17,selling,1066,214,20,11,40,3,0,0,-1,0,0,0
+10,18,DESIRED OIL AVAILABLE FOR MARKET,989,296,64,28,8,3,0,0,0,0,0,0
+10,19,market oil correction,1126,368,33,19,8,3,0,0,0,0,0,0
+10,20,TIME TO CORRECT MARKET OIL,1022,443,73,19,8,3,0,0,0,0,0,0
+10,21,PRODUCTIVITY DRILLING,124,404,60,19,8,3,0,0,0,0,0,0
+10,22,PRODUCTIVITY PROCESSING,530,416,60,19,8,3,0,0,0,0,0,0
+10,23,PRODUCTIVITY SHIPPING,916,488,60,19,8,3,0,0,0,0,0,0
+1,24,22,8,1,0,0,0,0,64,0,-1--1--1,,1|(561,342)|
+1,25,23,12,1,0,0,0,0,64,0,-1--1--1,,1|(915,414)|
+10,26,desired shipping worforce,1130,492,52,19,8,3,0,0,0,0,0,0
+10,27,DESIRED EXTRACTED OIL,288,317,64,19,8,3,0,0,0,0,0,0
+10,28,DESIRED PROCESSED OIL,655,283,63,19,8,3,0,0,0,0,0,0
+10,29,TIME TO CORRECT EXTRACTED OIL,257,451,73,19,8,3,0,0,0,0,0,0
+10,30,TIME TO CORRECT PROCESSED OIL,656,473,73,19,8,3,0,0,0,0,0,0
+1,31,4,19,1,0,0,0,0,64,0,-1--1--1,,1|(1098,274)|
+1,32,18,19,1,0,0,0,0,64,0,-1--1--1,,1|(1057,308)|
+1,33,20,19,1,0,0,0,0,64,0,-1--1--1,,1|(1063,377)|
+1,34,19,26,1,0,0,0,0,64,0,-1--1--1,,1|(1132,416)|
+1,35,23,26,1,0,0,0,0,64,0,-1--1--1,,1|(956,514)|
+1,36,17,26,1,0,0,0,0,64,0,-1--1--1,,1|(1173,262)|
+10,37,INITIAL OIL AVAILABLE FOR MARKET,937,109,64,28,8,3,0,0,0,0,0,0
+1,38,37,4,1,0,0,0,0,64,1,-1--1--1,,1|(955,145)|
+10,39,processed oil correction,774,414,43,19,8,3,0,0,0,0,0,0
+1,40,28,39,1,0,0,0,0,64,0,-1--1--1,,1|(721,300)|
+1,41,30,39,1,0,0,0,0,64,0,-1--1--1,,1|(677,428)|
+1,42,3,39,1,0,0,0,0,64,0,-1--1--1,,1|(797,236)|
+10,43,INITIAL PROCESSED OIL,714,121,63,19,8,3,0,0,0,0,0,0
+1,44,43,3,1,0,0,0,0,64,1,-1--1--1,,1|(704,133)|
+10,45,Shipping Workforce,820,107,41,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,46,45,12,1,0,0,0,0,64,0,-1--1--1,,1|(870,167)|
+10,47,INITIAL EXTRACTED OIL,702,25,64,19,8,3,0,0,0,0,0,0
+10,48,INITIAL OIL RESERVES,102,129,46,19,8,3,0,0,0,0,0,0
+10,49,extracted oil correction,402,390,40,19,8,3,0,0,0,0,0,0
+1,50,2,49,1,0,0,0,0,64,0,-1--1--1,,1|(420,275)|
+1,51,27,49,1,0,0,0,0,64,0,-1--1--1,,1|(343,323)|
+1,52,29,49,1,0,0,0,0,64,0,-1--1--1,,1|(327,396)|
+10,53,desired drilling workforce,394,479,57,19,8,3,0,0,0,0,0,0
+1,54,49,53,1,0,0,0,0,64,0,-1--1--1,,1|(401,414)|
+1,55,21,53,1,0,0,0,0,64,0,-1--1--1,,1|(152,483)|
+10,56,Drilling Workforce,77,349,41,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,57,desired processing workforce,781,496,59,19,8,3,0,0,0,0,0,0
+1,58,22,57,1,0,0,0,0,64,0,-1--1--1,,1|(536,453)|
+1,59,39,57,1,0,0,0,0,64,0,-1--1--1,,1|(781,453)|
+1,60,12,57,1,0,0,0,0,64,0,-1--1--1,,1|(844,285)|
+10,61,Processing Workforce,617,74,41,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,62,61,8,1,0,0,0,0,64,0,-1--1--1,,1|(594,164)|
+10,63,Oil Demand,1165,118,48,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,64,63,17,1,0,0,0,0,64,0,-1--1--1,,1|(1121,187)|
+10,65,Oil Demand,200,353,48,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,66,Oil Demand,620,344,48,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,67,Oil Demand,958,376,48,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,68,INITIAL OIL DEMAND,855,34,50,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,69,extracted oil correction,73,-43,44,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,70,desired mining workforce,208,-5,46,19,8,3,0,0,0,0,0,0
+1,71,69,70,1,0,0,0,0,64,0,-1--1--1,,1|(93,-34)|
+10,72,PRODUCTIVITY MINING,230,71,60,19,8,3,0,0,0,0,0,0
+1,73,72,70,1,0,0,0,0,64,0,-1--1--1,,1|(214,51)|
+10,74,fraction mining,200,-56,46,11,8,3,0,0,0,0,0,0
+1,75,74,70,1,0,0,0,0,64,0,-1--1--1,,1|(203,-33)|
+10,76,fraction drilling,325,-72,46,11,8,3,0,0,0,0,0,0
+1,77,74,76,1,0,0,0,0,64,0,-1--1--1,,1|(242,-63)|
+10,78,fraction drilling,480,535,55,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,79,78,53,1,0,0,0,0,64,0,-1--1--1,,1|(456,530)|
+10,80,Mining Workforce,119,85,41,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+12,81,48,427,29,10,8,0,3,0,0,-1,0,0,0
+1,82,84,81,4,0,0,22,0,0,0,-1--1--1,,1|(427,64)|
+1,83,84,2,100,0,0,22,0,0,0,-1--1--1,,1|(427,131)|
+11,84,48,427,98,8,6,33,3,0,0,4,0,0,0
+10,85,foreign processing,472,98,37,19,40,3,0,0,-1,0,0,0
+10,86,FOREIGN PROCESSING FRACTION,338,12,69,29,8,131,0,0,0,0,0,0
+1,87,86,85,1,0,0,0,0,64,0,-1--1--1,,1|(341,50)|
+1,88,90,2,4,0,0,22,0,0,0,-1--1--1,,1|(322,176)|
+1,89,90,1,100,0,0,22,0,0,0,-1--1--1,,1|(211,176)|
+11,90,972,266,176,6,8,34,3,0,0,1,0,0,0
+10,91,mining,266,195,21,11,40,3,0,0,-1,0,0,0
+1,92,72,91,1,0,0,0,0,64,0,-1--1--1,,1|(255,100)|
+1,93,80,91,1,0,0,0,0,64,0,-1--1--1,,1|(197,110)|
+10,94,INITIAL OIL RESERVES,58,296,50,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,95,extraction,334,128,32,11,8,3,0,0,0,0,0,0
+1,96,91,95,1,0,0,0,0,64,0,-1--1--1,,1|(296,188)|
+1,97,8,85,1,0,0,0,0,64,0,-1--1--1,,1|(529,178)|
+1,98,100,2,4,0,0,22,0,0,0,-1--1--1,,1|(322,237)|
+1,99,100,1,100,0,0,22,0,0,0,-1--1--1,,1|(211,237)|
+11,100,844,266,237,6,8,34,3,0,0,1,0,0,0
+10,101,drilling,266,256,22,11,40,3,0,0,-1,0,0,0
+1,102,101,95,1,0,0,0,0,64,0,-1--1--1,,1|(315,230)|
+1,103,56,101,1,0,0,0,0,64,0,-1--1--1,,1|(175,269)|
+1,104,21,101,1,0,0,0,0,64,0,-1--1--1,,1|(144,340)|
+1,105,48,1,0,0,0,0,0,64,1,-1--1--1,,1|(102,146)|
+1,106,47,2,0,0,0,0,0,64,1,-1--1--1,,1|(582,105)|
+1,107,2,8,1,0,0,0,0,64,0,-1--1--1,,1|(477,186)|
+1,108,47,8,1,0,0,0,0,64,0,-1--1--1,,1|(678,93)|
+1,109,3,12,1,0,0,0,0,64,0,-1--1--1,,1|(764,179)|
+1,110,43,12,1,0,0,0,0,64,0,-1--1--1,,1|(774,147)|
+1,111,4,17,1,0,0,0,0,64,0,-1--1--1,,1|(1002,181)|
+1,112,37,17,1,0,0,0,0,64,0,-1--1--1,,1|(979,121)|
+10,113,total processing,485,-44,49,11,8,3,0,0,0,0,0,0
+1,114,1,91,1,0,0,0,0,64,0,-1--1--1,,1|(169,153)|
+1,115,48,91,1,0,0,0,0,64,0,-1--1--1,,1|(175,125)|
+1,116,94,101,1,0,0,0,0,64,0,-1--1--1,,1|(175,258)|
+1,117,1,101,1,0,0,0,0,64,0,-1--1--1,,1|(189,219)|
+1,118,7,113,1,0,0,0,0,64,0,-1--1--1,,1|(549,114)|
+1,119,85,113,1,0,0,0,0,64,0,-1--1--1,,1|(485,44)|
+1,120,113,70,1,0,0,0,0,64,0,-1--1--1,,1|(352,-54)|
+10,121,total processing,308,575,58,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,122,121,53,1,0,0,0,0,64,0,-1--1--1,,1|(374,551)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Workforce
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Shipping Workforce,1176,157,48,26,3,131,0,0,0,0,0,0
+12,2,48,939,158,10,8,0,3,0,0,-1,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(1084,158)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(989,158)|
+11,5,48,1035,158,6,8,34,3,0,0,1,0,0,0
+10,6,hiring and laying off shipping personnel,1035,185,61,19,40,3,0,0,-1,0,0,0
+10,7,TIME TO HIRE OR LAY OFF SHIPPING PERSONNEL,1039,282,85,28,8,3,0,0,0,0,0,0
+1,8,7,6,1,0,0,0,0,64,0,-1--1--1,,1|(1021,233)|
+1,9,1,6,1,0,0,0,0,64,0,-1--1--1,,1|(1142,195)|
+10,10,desired shipping worforce,980,91,56,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,11,10,6,1,0,0,0,0,64,0,-1--1--1,,1|(980,110)|
+10,12,INITIAL SHIPPING WORKFORCE,1117,78,69,19,8,3,0,0,0,0,0,0
+1,13,12,1,1,0,0,0,0,64,1,-1--1--1,,1|(1139,108)|
+10,14,Drilling Workforce,380,186,45,27,3,131,0,0,0,0,0,0
+12,15,48,100,194,10,8,0,3,0,0,-1,0,0,0
+1,16,18,14,4,0,0,22,0,0,0,-1--1--1,,1|(269,186)|
+1,17,18,15,100,0,0,22,0,0,0,-1--1--1,,1|(100,186)|
+11,18,48,198,186,6,8,34,3,0,0,1,0,0,0
+10,19,hiring and laying off drilling personnel,198,213,70,19,40,3,0,0,-1,0,0,0
+10,20,TIME TO HIRE OR LAY OFF DRILLING PERSONNEL,377,294,84,25,8,131,0,0,0,0,0,0
+1,21,20,19,1,0,0,0,0,64,0,-1--1--1,,1|(344,304)|
+1,22,14,19,1,0,0,0,0,64,0,-1--1--1,,1|(331,234)|
+10,23,INITIAL DRILLING WORKFORCE,283,101,59,28,8,3,0,0,0,0,0,0
+1,24,23,14,1,0,0,0,0,64,1,-1--1--1,,1|(317,122)|
+10,25,Processing Workforce,785,160,52,27,3,131,0,0,0,0,0,0
+12,26,48,523,165,10,8,0,3,0,0,-1,0,0,0
+1,27,29,25,4,0,0,22,0,0,0,-1--1--1,,1|(684,165)|
+1,28,29,26,100,0,0,22,0,0,0,-1--1--1,,1|(578,165)|
+11,29,48,630,165,6,8,34,3,0,0,1,0,0,0
+10,30,hiring and laying off processing personnel,630,192,73,19,40,3,0,0,-1,0,0,0
+10,31,TIME TO HIRE AND LAY OFF PROCESSING PERSONNEL,776,287,92,28,8,3,0,0,0,0,0,0
+1,32,25,30,1,0,0,0,0,64,0,-1--1--1,,1|(738,205)|
+1,33,31,30,1,0,0,0,0,64,0,-1--1--1,,1|(678,255)|
+10,34,INITIAL PROCESSING WORKFORCE,724,77,59,28,8,3,0,0,0,0,0,0
+1,35,34,25,1,0,0,0,0,64,1,-1--1--1,,1|(748,93)|
+10,36,desired drilling workforce,141,115,61,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,37,36,19,1,0,0,0,0,64,0,-1--1--1,,1|(153,155)|
+10,38,desired processing workforce,532,100,64,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,39,38,30,1,0,0,0,0,64,0,-1--1--1,,1|(540,121)|
+10,40,direct jobs,762,402,49,11,8,3,0,0,0,0,0,0
+1,41,14,40,1,0,0,0,0,64,0,-1--1--1,,1|(478,209)|
+1,42,25,40,1,0,0,0,0,64,0,-1--1--1,,1|(892,228)|
+1,43,1,40,1,0,0,0,0,64,0,-1--1--1,,1|(1165,229)|
+10,44,Mining Workforce,388,398,47,25,3,131,0,0,0,0,0,0
+10,45,TIME TO HIRE OR LAY OFF MINING PERSONNEL,429,479,85,28,8,3,0,0,0,0,0,0
+12,46,48,130,401,10,8,0,3,0,0,-1,0,0,0
+1,47,49,44,4,0,0,22,0,0,0,-1--1--1,,1|(293,401)|
+1,48,49,46,100,0,0,22,0,0,0,-1--1--1,,1|(187,401)|
+11,49,48,240,401,6,8,34,3,0,0,1,0,0,0
+10,50,hiring and laying off mining personnel,240,428,61,19,40,3,0,0,-1,0,0,0
+10,51,desired mining workforce,124,334,50,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,52,51,50,1,0,0,0,0,64,0,-1--1--1,,1|(158,386)|
+1,53,45,50,1,0,0,0,0,64,0,-1--1--1,,1|(352,484)|
+1,54,44,50,1,0,0,0,0,64,0,-1--1--1,,1|(329,435)|
+1,55,44,40,1,0,0,0,0,64,0,-1--1--1,,1|(606,446)|
+10,56,INITIAL MINING WORKFORCE,247,342,63,19,8,3,0,0,0,0,0,0
+1,57,56,44,1,0,0,0,0,64,1,-1--1--1,,1|(304,356)|
+10,58,indirect jobs,696,493,39,11,8,3,0,0,0,0,0,0
+10,59,total jobs,860,488,30,11,8,3,0,0,0,0,0,0
+10,60,INDIRECT JOBS MULTIPLIER,581,537,60,19,8,3,0,0,0,0,0,0
+1,61,60,58,1,0,0,0,0,64,0,-1--1--1,,1|(654,541)|
+1,62,40,58,1,0,0,0,0,64,0,-1--1--1,,1|(744,451)|
+1,63,58,59,1,0,0,0,0,64,0,-1--1--1,,1|(739,527)|
+1,64,40,59,1,0,0,0,0,64,0,-1--1--1,,1|(781,441)|
+10,65,TOTAL JOBS STATS 2018,1032,492,48,19,8,3,0,0,0,0,0,0
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Demand
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Oil Demand,621,267,50,28,3,131,0,0,0,0,0,0
+12,2,48,392,271,10,8,0,3,0,0,-1,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(531,271)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(441,271)|
+11,5,48,486,271,6,8,34,3,0,0,1,0,0,0
+10,6,change in oil demand,486,298,40,19,40,3,0,0,-1,0,0,0
+10,7,OIL DEMAND INCREASE RATE,362,176,68,25,8,131,0,0,0,0,0,0
+10,8,TIME TO CHANGE OIL DEMAND,616,366,69,19,8,3,0,0,0,0,0,0
+10,9,INITIAL OIL DEMAND,699,185,46,19,8,3,0,0,0,0,0,0
+1,10,9,1,1,0,0,0,0,64,1,-1--1--1,,1|(688,208)|
+10,11,Time,353,89,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,12,THOUSANDS,204,228,50,11,8,3,0,0,0,0,0,0
+10,13,Demand Table,137,85,47,11,8,3,0,0,0,0,0,0
+10,14,year,484,101,15,11,8,3,0,0,0,0,0,0
+1,15,7,6,1,0,0,0,0,64,0,-1--1--1,,1|(335,235)|
+1,16,1,6,1,0,0,0,0,64,0,-1--1--1,,1|(583,304)|
+1,17,8,6,1,0,0,0,0,64,0,-1--1--1,,1|(525,360)|
+1,18,12,7,1,0,0,0,0,64,0,-1--1--1,,1|(270,221)|
+1,19,14,7,1,0,0,0,0,64,0,-1--1--1,,1|(445,147)|
+1,20,11,7,1,0,0,0,0,64,0,-1--1--1,,1|(371,121)|
+1,21,13,7,1,0,0,0,0,64,0,-1--1--1,,1|(230,101)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Green House Gases
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Green House Gases,717,276,55,36,3,131,0,0,0,0,0,0
+12,2,48,473,276,10,8,0,3,0,0,-1,0,0,0
+1,3,5,1,4,0,0,22,0,0,0,-1--1--1,,1|(620,276)|
+1,4,5,2,100,0,0,22,0,0,0,-1--1--1,,1|(524,276)|
+11,5,48,572,276,6,8,34,3,0,0,1,0,0,0
+10,6,emissions,572,295,31,11,40,3,0,0,-1,0,0,0
+10,7,EMISSIONS PER BARREL MINED,726,74,61,19,8,3,0,0,0,0,0,0
+10,8,EMISSIONS PER BARREL DRILLED,697,437,67,19,8,3,0,0,0,0,0,0
+10,9,domestic processing,252,245,43,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,10,EMISSIONS PER BARREL PROCESSED,270,161,80,19,8,3,0,0,0,0,0,0
+10,11,shipping,253,312,36,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,12,EMISSIONS PER BARREL SHIPPED,233,423,67,19,8,3,0,0,0,0,0,0
+10,13,mining emissions,607,166,52,11,8,3,0,0,0,0,0,0
+10,14,processing emissions,456,208,34,19,8,3,0,0,0,0,0,0
+10,15,shipping emissions,412,327,57,11,8,3,0,0,0,0,0,0
+10,16,drilling emissions,609,370,52,11,8,3,0,0,0,0,0,0
+1,17,8,16,1,0,0,0,0,64,0,-1--1--1,,1|(633,414)|
+1,18,16,6,1,0,0,0,0,64,0,-1--1--1,,1|(581,347)|
+1,19,12,15,1,0,0,0,0,64,0,-1--1--1,,1|(382,401)|
+1,20,11,15,1,0,0,0,0,64,0,-1--1--1,,1|(320,367)|
+1,21,15,6,1,0,0,0,0,64,0,-1--1--1,,1|(498,339)|
+1,22,9,14,1,0,0,0,0,64,0,-1--1--1,,1|(331,253)|
+1,23,10,14,1,0,0,0,0,64,0,-1--1--1,,1|(359,176)|
+1,24,7,13,1,0,0,0,0,64,0,-1--1--1,,1|(708,109)|
+1,25,14,6,1,0,0,0,0,64,0,-1--1--1,,1|(503,231)|
+1,26,13,6,1,0,0,0,0,64,0,-1--1--1,,1|(611,194)|
+10,27,INITIAL GREEN HOUSE GASES,873,192,59,19,8,3,0,0,0,0,0,0
+1,28,27,1,1,0,0,0,0,64,1,-1--1--1,,1|(838,215)|
+10,29,CANADIAN EMISSIONS,1035,276,45,19,8,3,0,0,0,0,0,0
+10,30,oil sands emissions 2018,975,388,52,23,8,131,0,0,0,0,0,0
+10,31,FRACTION OF OIL SANDS EMISSIONS,1106,477,74,19,8,3,0,0,0,0,0,0
+1,32,29,30,1,0,0,0,0,64,0,-1--1--1,,1|(1043,311)|
+1,33,31,30,1,0,0,0,0,64,0,-1--1--1,,1|(1071,437)|
+10,34,mining,530,80,30,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,35,34,13,1,0,0,0,0,64,0,-1--1--1,,1|(540,131)|
+10,36,drilling,482,439,31,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,37,36,16,1,0,0,0,0,64,0,-1--1--1,,1|(551,437)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Land Use
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Land Available,473,320,54,40,3,131,0,0,0,0,0,0
+10,2,Land Used,818,319,51,36,3,131,0,0,0,0,0,0
+1,3,5,2,4,0,0,22,0,0,0,-1--1--1,,1|(710,319)|
+1,4,5,1,100,0,0,22,0,0,0,-1--1--1,,1|(584,319)|
+11,5,1212,647,319,6,8,34,3,0,0,1,0,0,0
+10,6,net land used,647,338,42,11,40,3,0,0,-1,0,0,0
+10,7,INITIAL LAND AVAILABLE,426,206,71,22,8,131,0,0,0,0,0,0
+1,8,7,1,1,0,0,0,0,64,1,-1--1--1,,1|(404,212)|
+10,9,LAND REQUIRED PER BARREL MINED,605,510,77,19,8,3,0,0,0,0,0,0
+1,10,9,6,1,0,0,0,0,64,0,-1--1--1,,1|(652,472)|
+1,11,2,6,1,0,0,0,0,64,0,-1--1--1,,1|(761,280)|
+10,12,TIME TO RECLAIM LAND,783,180,61,19,8,3,0,0,0,0,0,0
+1,13,12,6,1,0,0,0,0,64,0,-1--1--1,,1|(722,201)|
+1,14,7,6,1,0,0,0,0,64,0,-1--1--1,,1|(472,206)|
+1,15,1,6,1,0,0,0,0,64,0,-1--1--1,,1|(526,351)|
+10,16,INITIAL LAND USED,957,242,55,19,8,3,0,0,0,0,0,0
+1,17,16,2,1,0,0,0,0,64,1,-1--1--1,,1|(938,283)|
+10,18,mining,443,458,30,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,19,18,6,1,0,0,0,0,64,0,-1--1--1,,1|(558,435)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Water Use
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Water Available,465,325,48,42,3,131,0,0,0,0,0,0
+10,2,Water Used,810,328,49,44,3,131,0,0,0,0,0,0
+10,3,WATER REQUIRED PER BARREL DRILLED,452,544,90,32,8,131,0,0,0,0,0,0
+10,4,WATER REQUIRED PER BARREL MINED,766,538,76,28,8,131,0,0,0,0,0,0
+10,5,RECYCLING FRACTION MINING,649,167,59,25,8,131,0,0,0,0,0,0
+10,6,RECYCLING FRACTION DRILLING,786,217,64,26,8,131,0,0,0,0,0,0
+10,7,INITIAL WATER AVAILABLE,305,191,60,19,8,3,0,0,0,0,0,0
+10,8,water for drilling,503,439,51,11,8,3,0,0,0,0,0,0
+10,9,water for mining,691,439,51,11,8,3,0,0,0,0,0,0
+1,10,3,8,1,0,0,0,0,64,0,-1--1--1,,1|(500,516)|
+1,11,4,9,1,0,0,0,0,64,0,-1--1--1,,1|(709,505)|
+10,12,INITIAL TAILINGS,968,191,42,19,8,3,0,0,0,0,0,0
+1,13,15,2,4,0,0,22,0,0,0,-1--1--1,,1|(702,325)|
+1,14,15,1,100,0,0,22,0,0,0,-1--1--1,,1|(572,325)|
+11,15,1292,637,325,6,8,34,3,0,0,1,0,0,0
+10,16,water use,637,344,31,11,40,3,0,0,-1,0,0,0
+1,17,12,2,1,0,0,0,0,64,1,-1--1--1,,1|(967,245)|
+1,18,6,16,1,0,0,0,0,64,0,-1--1--1,,1|(689,270)|
+1,19,5,16,1,0,0,0,0,64,0,-1--1--1,,1|(630,216)|
+1,20,8,16,1,0,0,0,0,64,0,-1--1--1,,1|(570,429)|
+1,21,9,16,1,0,0,0,0,64,0,-1--1--1,,1|(702,402)|
+1,22,7,1,0,0,0,0,0,64,1,-1--1--1,,1|(366,242)|
+10,23,mining,876,445,30,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,24,23,9,1,0,0,0,0,64,0,-1--1--1,,1|(792,479)|
+1,25,1,16,1,0,0,0,0,64,0,-1--1--1,,1|(512,299)|
+1,26,7,16,1,0,0,0,0,64,0,-1--1--1,,1|(427,202)|
+10,27,drilling,311,460,31,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,28,27,8,1,0,0,0,0,64,0,-1--1--1,,1|(406,477)|
+///---\\\
+:GRAPH Jobs
+:TITLE Jobs
+:SCALE
+:VAR total jobs
+:VAR TOTAL JOBS STATS 2018
+
+:GRAPH Stock
+:TITLE Stock
+:SCALE
+:VAR Extracted Oil
+:VAR Processed Oil
+:VAR Oil Available for Market
+
+:GRAPH Job_Types
+:TITLE Job Types
+:SCALE
+:VAR Drilling Workforce
+:VAR Mining Workforce
+:VAR Processing Workforce
+:VAR Shipping Workforce
+
+:GRAPH supply_and_demand
+:TITLE supply and demand
+:SCALE
+:VAR Oil Demand
+:VAR extraction
+:VAR processing
+:VAR shipping
+:VAR selling
+:L<%^E!@
+1:Linear Demand.vdf
+1:Slow Recovery.vdf
+1:COVID-19 Demand Collapse.vdf
+9:Slow Recovery
+22:$,Dollar,Dollars,$s
+22:Hour,Hours
+22:Month,Months
+22:Person,People,Persons
+22:Unit,Units
+22:Week,Weeks
+22:Year,Years
+22:Day,Days
+15:0,0,0,0,0,0
+19:100,5
+27:2,
+34:0,
+4:Time
+5:water use
+35:Date
+36:YYYY
+37:2010
+38:1
+39:1
+40:0
+41:1
+24:0
+25:20
+26:20

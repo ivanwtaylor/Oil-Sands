@@ -1,0 +1,139 @@
+{UTF-8}
+"Economic Well-Being"  = A FUNCTION OF( Oil Extraction and Shipping,Workforce)
+	~	
+	~		|
+
+Emissions  = A FUNCTION OF( )
+	~	
+	~		|
+
+"Environmental Well-Being"  = A FUNCTION OF( Oil Extraction and Shipping)
+	~	
+	~		|
+
+First Nations  = A FUNCTION OF( )
+	~	
+	~		|
+
+Land Use  = A FUNCTION OF( )
+	~	
+	~		|
+
+Oil Extraction  = A FUNCTION OF( )
+	~	
+	~		|
+
+Oil Extraction and Shipping  = A FUNCTION OF( Worker Productivity,Workforce)
+	~	
+	~		|
+
+Oil Shipping  = A FUNCTION OF( )
+	~	
+	~		|
+
+Productivity  = A FUNCTION OF( )
+	~	
+	~		|
+
+"Social Well-Being"  = A FUNCTION OF( "Environmental Well-Being",Workforce)
+	~	
+	~		|
+
+Water Use  = A FUNCTION OF( )
+	~	
+	~		|
+
+Worker Productivity  = A FUNCTION OF( )
+	~	
+	~		|
+
+Workers  = A FUNCTION OF( )
+	~	
+	~		|
+
+Workforce  = A FUNCTION OF( )
+	~	
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 100
+	~	Month
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	Month
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP 
+	~	Month [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 1
+	~	Month [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 1
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Oil Extraction and Shipping,772,395,54,34,3,131,0,0,0,0,0,0
+10,2,Worker Productivity,987,545,51,31,3,131,0,0,0,0,0,0
+10,3,Workforce,574,190,51,29,3,131,0,0,0,0,0,0
+10,4,"Environmental Well-Being",603,563,61,34,3,131,0,0,0,0,0,0
+10,5,"Social Well-Being",427,399,63,34,3,131,0,0,0,0,0,0
+10,6,"Economic Well-Being",1036,183,60,30,3,131,0,0,0,0,0,0
+1,7,1,6,1,0,0,0,0,64,0,-1--1--1,,1|(798,281)|
+1,8,3,6,1,0,0,0,0,64,0,-1--1--1,,1|(737,142)|
+1,9,1,4,1,0,0,0,0,64,0,-1--1--1,,1|(759,480)|
+1,10,4,5,1,0,0,0,0,64,0,-1--1--1,,1|(508,544)|
+1,11,3,5,1,0,0,0,0,64,0,-1--1--1,,1|(518,234)|
+1,12,2,1,1,0,0,0,0,64,0,-1--1--1,,1|(960,489)|
+1,14,3,1,1,0,0,0,0,64,0,-1--1--1,,1|(672,246)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*View 2
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Productivity,1075,215,38,11,8,3,0,0,0,0,0,0
+10,2,Workers,857,126,29,11,8,3,0,0,0,0,0,0
+10,3,Oil Extraction,792,263,44,11,8,3,0,0,0,0,0,0
+10,4,Oil Shipping,973,378,39,11,8,3,0,0,0,0,0,0
+10,5,Land Use,602,181,32,11,8,3,0,0,0,0,0,0
+10,6,Water Use,598,281,35,11,8,3,0,0,0,0,0,0
+10,7,Emissions,620,411,32,11,8,3,0,0,0,0,0,0
+10,8,First Nations,469,532,41,11,8,3,0,0,0,0,0,0
+///---\\\
+:L<%^E!@
+9:Current
+22:$,Dollar,Dollars,$s
+22:Day,Days
+22:Hour,Hours
+22:Month,Months
+22:Person,People,Persons
+22:Unit,Units
+22:Week,Weeks
+22:Year,Years
+15:0,0,0,0,0,0
+19:100,0
+27:2,
+34:0,
+5:FINAL TIME
+35:Date
+36:YYYY-MM-DD
+37:2000
+38:1
+39:1
+40:2
+41:0
+24:0
+25:0
+26:0

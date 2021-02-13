@@ -1,0 +1,1495 @@
+{UTF-8}
+economic benefits=
+	royalities+taxes+wages
+	~	dollars/year
+	~		|
+
+taxes=
+	average price*extraction*tax rate
+	~	dollars/year
+	~		|
+
+social well being=
+	(Services/First Nations People)/(INITIAL SERVICES/INITIAL FIRST NATIONS PEOPLE)
+	~	dmnl
+	~		|
+
+domestic shipping=
+	domestic pipeline+domestic rail
+	~	barrels/year
+	~		|
+
+INITIAL FISH=
+	100
+	~	fish
+	~		|
+
+EFFECT OF WATER AVAILABLE ON FISH LIFE EXPECTANCE(
+	[(0,0)-(2,2)],(0,0),(1,1),(2,1))
+	~	dmnl
+	~		|
+
+INITIAL LAND AVAILABLE=
+	4800
+	~	km2
+	~		|
+
+Emission Rate Mining= INTEG (
+	change in emission rate mining,
+		INITIAL EMISSION RATE MINING)
+	~	kg/barrels
+	~		|
+
+emissions=
+	drilling*Emission Rate Drilling+mining*Emission Rate Mining
+	~	kg/year
+	~		|
+
+environmental well being=
+	(Fish/INITIAL FISH)*(Wildlife/INITIAL WILDLIFE)*(initial emissions/emissions)
+	~	dmnl
+	~		|
+
+DESIRED EMISSION RATE MINING=
+	50.7694
+	~	kg/barrels
+	~		|
+
+desired mining workforce=
+	IF THEN ELSE(Time<=COVD START TIME, LONG TERM MINING WORKFORCE ,IF THEN ELSE(Time<=(\
+		COVD START TIME+COVID DURATION), COVID DESIRED MINING WORKFORCE , LONG TERM MINING WORKFORCE\
+		))
+	~	people
+	~		|
+
+change in emission rate drilling=
+	(DESIRED EMISSION RATE DRILLING-Emission Rate Drilling)/TIME TO CHANGE EMISSION RATE DRILLING
+	~	(kg/barrels)/year
+	~		|
+
+change in emission rate mining=
+	(DESIRED EMISSION RATE MINING-Emission Rate Mining)/TIME TO CHANGE EMISSION RATE MINING
+	~	(kg/barrels)/year
+	~		|
+
+deaths=
+	First Nations People/departure time
+	~	people/year
+	~		|
+
+Fish= INTEG (
+	fish births-fish deaths-fishing,
+		INITIAL FISH)
+	~	fish
+	~		|
+
+INITIAL WATER AVAILABLE=
+	1e+012
+	~	barrels
+	~		|
+
+INITIAL WATER USED=
+	0
+	~	barrels
+	~		|
+
+COVD START TIME=
+	8
+	~	years
+	~		|
+
+COVID DESIRED MINING WORKFORCE=
+	10000
+	~	people
+	~		|
+
+COVID DESIRED PIPELING WORKFORCE=
+	5000
+	~	people
+	~		|
+
+COVID DESIRED RAIL WORKFORCE=
+	3000
+	~	people
+	~		|
+
+COVID DESIRED WORKFORCE=
+	1000
+	~	people
+	~		|
+
+COVID DURATION=
+	0
+	~	years
+	~		|
+
+EFFECT OF LAND AVAILABLE ON WILDLIFE LIFE EXPECTANCY(
+	[(0,0)-(2,2)],(0,0),(1,1),(2,1))
+	~	dmnl
+	~		|
+
+deisred drilling workforce=
+	IF THEN ELSE(Time<=COVD START TIME, LONG TERM DRILLING WORKFORCE ,IF THEN ELSE(Time<=\
+		(COVD START TIME+COVID DURATION), COVID DESIRED WORKFORCE , LONG TERM DRILLING WORKFORCE\
+		 ) )
+	~	people
+	~		|
+
+LONG TERM MINING WORKFORCE=
+	43000
+	~	people
+	~		|
+
+WATER USE RATE DRILLING=
+	0.2
+	~	barrels/barrels
+	~		|
+
+departure time=
+	NORMAL DEPARTURE TIME*EFFECT OF EMISSIONS ON DEPARTURE TIME(emissions/initial emissions\
+		)
+	~	years
+	~		|
+
+DESIRED EMISSION RATE DRILLING=
+	38.7724
+	~	kg/barrels
+	~		|
+
+LONG TERM RAIL WORKFORCE=
+	5000
+	~	people
+	~		|
+
+desired pipeline workers=
+	IF THEN ELSE(Time<=COVD START TIME, LONG TERM PIPELINE WORKFORCE ,IF THEN ELSE(Time<=\
+		(COVD START TIME+COVID DURATION), 
+	COVID DESIRED PIPELING WORKFORCE , LONG TERM PIPELINE WORKFORCE))
+	~	people
+	~		|
+
+desired rail workforce=
+	IF THEN ELSE(Time<=COVD START TIME, LONG TERM RAIL WORKFORCE ,IF THEN ELSE(Time<=(COVD START TIME\
+		+COVID DURATION), COVID DESIRED RAIL WORKFORCE
+	 , LONG TERM RAIL WORKFORCE ) )
+	~	people
+	~		|
+
+wildlife life expectancy=
+	NORMAL WILDLIFE LIFE EXPECTANCY*EFFECT OF LAND AVAILABLE ON WILDLIFE LIFE EXPECTANCY\
+		(Land Available/INITIAL LAND AVAILABLE)
+	~	years
+	~		|
+
+net land use=
+	(drilling*LAND USE RATE DRILLING+mining*LAND USE RATE MINING)-Land Used*RECLAMATION RATE
+	~	km2/year
+	~		|
+
+net water use=
+	WATER USE RATE DRILLING*drilling*(1-RECYCLING RATE DRILLING)+mining*WATER USE RATE MINING\
+		*(1-RECYCLING RATE MINING)
+	~	barrels/year
+	~		|
+
+fish births=
+	Fish*FISH BIRTH RATE
+	~	fish/year
+	~		|
+
+WATER USE RATE MINING=
+	2.6
+	~	barrels/barrels
+	~		|
+
+NORMAL FISH LIFE EXPECTANCY=
+	5
+	~	years
+	~		|
+
+NORMAL WILDLIFE LIFE EXPECTANCY=
+	10
+	~	years
+	~		|
+
+FISHING RATE=
+	0.2
+	~	fish/fish/year
+	~		|
+
+wildlife births=
+	Wildlife*WILDLIFE BIRTH RATE
+	~	wildlife/year
+	~		|
+
+EFFECT OF EMISSIONS ON DEPARTURE TIME(
+	[(0,0)-(10,10)],(0,1),(1,1),(2,0))
+	~	dmnl
+	~		|
+
+RECYCLING RATE MINING=
+	0.75
+	~	fraction
+	~		|
+
+Emission Rate Drilling= INTEG (
+	change in emission rate drilling,
+		INITIAL EMISSION RATE DRILLING)
+	~	kg/barrels
+	~		|
+
+INITAL LAND USED=
+	901
+	~	km2
+	~		|
+
+RECYCLING RATE DRILLING=
+	0.86
+	~	fraction
+	~		|
+
+fish life expectancy=
+	NORMAL FISH LIFE EXPECTANCY*EFFECT OF WATER AVAILABLE ON FISH LIFE EXPECTANCE(Water Available\
+		/INITIAL WATER AVAILABLE)
+	~	years
+	~		|
+
+fishing=
+	Fish*FISHING RATE
+	~	fish/year
+	~		|
+
+initial emissions=
+	INITIAL(emissions)
+	~	kg/year
+	~		|
+
+Land Used= INTEG (
+	net land use,
+		INITAL LAND USED)
+	~	km2
+	~		|
+
+wildlife deaths=
+	Wildlife/wildlife life expectancy
+	~	wildlife/year
+	~		|
+
+HUNTING RATE=
+	0.2
+	~	wildlife/wildlife/year
+	~		|
+
+INITIAL EMISSION RATE MINING=
+	91.0125
+	~	kg/barrels
+	~		|
+
+FISH BIRTH RATE=
+	0.39
+	~	fish/fish/year
+	~		|
+
+INITIAL EMISSION RATE DRILLING=
+	75.5202
+	~	kg/barrels
+	~		|
+
+fish deaths=
+	Fish/fish life expectancy
+	~	fish/year
+	~		|
+
+TIME TO CHANGE EMISSION RATE MINING=
+	12.2258
+	~	years
+	~		|
+
+TIME TO CHANGE EMISSION RATE DRILLING=
+	31.8246
+	~	years
+	~		|
+
+hunting=
+	Wildlife*HUNTING RATE
+	~	wildlife/year
+	~		|
+
+Land Available= INTEG (
+	-net land use,
+		INITIAL LAND AVAILABLE)
+	~	km2
+	~		|
+
+Wildlife= INTEG (
+	wildlife births-hunting-wildlife deaths,
+		INITIAL WILDLIFE)
+	~	wildlife
+	~		|
+
+hiring or firing drillers=
+	(deisred drilling workforce-Drilling Workforce)/TIME TO HIRE OR FIRE DRILLERS
+	~	people/year
+	~		|
+
+Water Used= INTEG (
+	net water use,
+		INITIAL WATER USED)
+	~	barrels
+	~		|
+
+INITIAL WILDLIFE=
+	100
+	~	wildlife
+	~		|
+
+WILDLIFE BIRTH RATE=
+	0.295
+	~	wildlife/wildlife/year
+	~		|
+
+Water Available= INTEG (
+	-net water use,
+		INITIAL WATER AVAILABLE)
+	~	barrels
+	~		|
+
+LONG TERM PIPELINE WORKFORCE=
+	31000
+	~	people
+	~		|
+
+AVERAGE INFRASTRUCTURE LIFE SPAN=
+	50
+	~	years
+	~		|
+
+average price=
+	60
+	~	dollars/barrels
+	~		|
+
+average wage=
+	1e+006
+	~	dollars/person/year
+	~		|
+
+BIRTH RATE=
+	0.02
+	~	people/person/year
+	~		|
+
+births=
+	First Nations People*BIRTH RATE
+	~	people/year
+	~		|
+
+building=
+	Infrastructure*infracture build rate
+	~	buildings/year
+	~		|
+
+STANDARD USE OF GENERAL SERVICES=
+	100
+	~	people/service units
+	~		|
+
+INITIAL SERVICES=
+	1000
+	~	service units
+	~		|
+
+change in services=
+	(desired services-Services)/TIME TO CHANGE SERVICES
+	~	service units/year
+	~		|
+
+DEMAND FOR NEW INFRASTRUCTURE(
+	[(0,0)-(2,2)],(0,0),(1,1),(2,2))
+	~	dmnl
+	~		|
+
+demolishing=
+	Infrastructure/AVERAGE INFRASTRUCTURE LIFE SPAN
+	~	buildings/year
+	~		|
+
+NORMAL DEPARTURE TIME=
+	72
+	~	years
+	~		|
+
+Infrastructure= INTEG (
+	building-demolishing,
+		INITIAL INFRASTRUCTURE)
+	~	buildings
+	~		|
+
+inital total population=
+	inital workforce+INITIAL FIRST NATIONS PEOPLE
+	~	people
+	~		|
+
+inital workforce=
+	INITIAL DRILLING WORKFORCE+INITIAL MINING WORKFORCE+INITIAL PIPELINE WORKFORCE+INITIAL RAIL WORKFORCE
+	~	people
+	~		|
+
+desired services=
+	INITIAL SERVICES*(services density/(inital total population/INITIAL SERVICES))
+	~	service units
+	~		|
+
+tax rate=
+	0.02
+	~	fraction
+	~		|
+
+initial economic benefits=
+	INITIAL(economic benefits)
+	~	dollars/year
+	~		|
+
+INITIAL FIRST NATIONS PEOPLE=
+	10000
+	~	people
+	~		|
+
+INITIAL INFRASTRUCTURE=
+	100
+	~	buildings
+	~		|
+
+RECLAMATION RATE=
+	0.11/60
+	~	km/km/year
+	~		|
+
+Services= INTEG (
+	change in services,
+		INITIAL SERVICES)
+	~	service units
+	~		|
+
+services density=
+	total population/Services
+	~	people/service units
+	~		|
+
+LAND USE RATE MINING=
+	3.81558e-009
+	~	km2/barrels
+	~		|
+
+total population=
+	First Nations People+total workforce
+	~	people
+	~		|
+
+First Nations People= INTEG (
+	births-deaths,
+		INITIAL FIRST NATIONS PEOPLE)
+	~	people
+	~		|
+
+royal rate=
+	0.02
+	~	dollars/barrels
+	~		|
+
+LAND USE RATE DRILLING=
+	4.92846e-011
+	~	km2/barrels
+	~		|
+
+infracture build rate=
+	NORMAL BUILD RATE*DEMAND FOR NEW INFRASTRUCTURE((total population/Services)/STANDARD USE OF GENERAL SERVICES\
+		)
+	~	buildings/buildings/year
+	~		|
+
+NORMAL BUILD RATE=
+	0.1
+	~	buildings/buildings/year
+	~		|
+
+royalities=
+	extraction*royal rate
+	~	dollars/year
+	~		|
+
+wages=
+	total workforce*average wage
+	~	dollars/year
+	~		|
+
+TIME TO CHANGE SERVICES=
+	10
+	~	years
+	~		|
+
+economic well being=
+	economic benefits/initial economic benefits
+	~	dmnl
+	~		|
+
+total workforce=
+	Drilling Workforce+Mining Workforce+Pipeline Workforce+Rail Workforce
+	~	people
+	~		|
+
+change in driller productivity=
+	(LONG TERM DRILLER PRODUCTIVITY-Driller Productivity)/TIME TO CHANGE DRILLER PRODUCTIVITY
+	~	barrels/person/year/year
+	~		|
+
+change in miner productivity=
+	(LONG TERM MINER PRODUCTIVITY-Miner Productivity)/TIME TO CHANGE MINER PRODUCTIVITY
+	~	barrels/person/year/year
+	~		|
+
+change in pipeline productivity=
+	(LONG TERM PIPELINE PRODUCTIVITY-Pipeline Productivity)/TIME TO CHANGE PIPELINE PRODUCTIVITY
+	~	barrels/person/year/year
+	~		|
+
+change in rail productivity=
+	(LONG TERM RAIL PRODUCTIVITY-Rail Productivity)/TIME TO CHANGE RAIL PRODUCTIVITY
+	~	barrels/person/year/year
+	~		|
+
+LONG TERM DRILLER PRODUCTIVITY=
+	25000
+	~	barrels/person/year
+	~		|
+
+LONG TERM DRILLING WORKFORCE=
+	22000
+	~	people
+	~		|
+
+LONG TERM MINER PRODUCTIVITY=
+	3000
+	~	barrels/person/year
+	~		|
+
+LONG TERM PIPELINE PRODUCTIVITY=
+	45000
+	~	barrels/person/year
+	~		|
+
+LONG TERM RAIL PRODUCTIVITY=
+	8000
+	~	barrels/person/year
+	~		|
+
+domestic pipeline=
+	FRACTION DOMESTIC*total pipeline
+	~	barrels/year
+	~		|
+
+domestic rail=
+	total rail*FRACTION DOMESTIC
+	~	barrels/year
+	~		|
+
+TOTAL SHIPPING=
+	5.5
+	~	million barrels/day
+	~		|
+
+drilling=
+	Drilling Workforce*Driller Productivity
+	~	barrels/year
+	~		|
+
+INITIAL EXTRACTED OIL=
+	1e+009
+	~	barrels
+	~		|
+
+INITIAL MINABLE OIL=
+	INITIAL TOTAL OIL RESERVES*FRACTION OF OIL MINABLE
+	~	barrels
+	~		|
+
+exports pipeline=
+	total pipeline*(1-FRACTION DOMESTIC)
+	~	barrels/year
+	~		|
+
+exports rail=
+	total rail*(1-FRACTION DOMESTIC)
+	~	barrels/year
+	~		|
+
+Extracted Oil= INTEG (
+	drilling+mining-domestic pipeline-domestic rail-exports pipeline-exports rail,
+		INITIAL EXTRACTED OIL)
+	~	barrels
+	~		|
+
+extraction=
+	drilling+mining
+	~	barrels/year
+	~		|
+
+FRACTION DOMESTIC=
+	SHIPPING TO DOMESTIC REFINERIES/TOTAL SHIPPING
+	~	fraction
+	~		|
+
+FRACTION OF OIL MINABLE=
+	0.2
+	~	fraction
+	~		|
+
+hiriing and firing rail workers=
+	(desired rail workforce-Rail Workforce)/TIME TO HIRE OR FIRE RAIL WORKERS
+	~	people/year
+	~		|
+
+hiring and firing pipeline workers=
+	(desired pipeline workers-Pipeline Workforce)/TIME TO HIRE OR FIRE PIPELINE WORKERS
+	~	people/year
+	~		|
+
+hiring or firing miners=
+	(desired mining workforce-Mining Workforce)/TIME TO HIRE OR FIRE MINERS
+	~	people/year
+	~		|
+
+INITIAL DRILLABLE OIL=
+	INITIAL TOTAL OIL RESERVES*(1-FRACTION OF OIL MINABLE)
+	~	barrels
+	~		|
+
+TIME TO CHANGE PIPELINE PRODUCTIVITY=
+	10
+	~	years
+	~		|
+
+TIME TO CHANGE RAIL PRODUCTIVITY=
+	5
+	~	years
+	~		|
+
+TIME TO HIRE OR FIRE DRILLERS=
+	14
+	~	years
+	~		|
+
+TIME TO HIRE OR FIRE MINERS=
+	26
+	~	years
+	~		|
+
+SHIPPING TO DOMESTIC REFINERIES=
+	1.7
+	~	million barrels/day
+	~		|
+
+TIME TO CHANGE DRILLER PRODUCTIVITY=
+	87
+	~	years
+	~		|
+
+TIME TO CHANGE MINER PRODUCTIVITY=
+	36
+	~	years
+	~		|
+
+total rail=
+	Rail Productivity*Rail Workforce
+	~	barrels/year
+	~		|
+
+TIME TO HIRE OR FIRE PIPELINE WORKERS=
+	9
+	~	years
+	~		|
+
+mining=
+	Mining Workforce*Miner Productivity
+	~	barrels/year
+	~		|
+
+total pipeline=
+	Pipeline Productivity*Pipeline Workforce
+	~	barrels/year
+	~		|
+
+TIME TO HIRE OR FIRE RAIL WORKERS=
+	5
+	~	years
+	~		|
+
+Driller Productivity= INTEG (
+	change in driller productivity,
+		INITIAL DRILLER PRODUCTIVITY)
+	~	barrels/person/year
+	~		|
+
+Drilling Oil Reserves= INTEG (
+	-drilling,
+		INITIAL DRILLABLE OIL)
+	~	barrels
+	~		|
+
+Drilling Workforce= INTEG (
+	hiring or firing drillers,
+		INITIAL DRILLING WORKFORCE)
+	~	people
+	~		|
+
+INITIAL DRILLER PRODUCTIVITY=
+	50000
+	~	barrels/person/year
+	~		|
+
+INITIAL DRILLING WORKFORCE=
+	7000
+	~	people
+	~		|
+
+INITIAL MINER PRODUCTIVITY=
+	40000
+	~	barrels/person/year
+	~		|
+
+INITIAL MINING WORKFORCE=
+	9000
+	~	people
+	~		|
+
+INITIAL PIPELINE PRODUCTIVITY=
+	20000
+	~	barrels/person/year
+	~		|
+
+INITIAL PIPELINE WORKFORCE=
+	28000
+	~	people
+	~		|
+
+INITIAL RAIL PRODUCTIVITY=
+	4000
+	~	barrels/person/year
+	~		|
+
+INITIAL RAIL WORKFORCE=
+	3280
+	~	people
+	~		|
+
+INITIAL TOTAL OIL RESERVES=
+	1.69411e+011
+	~	barrels
+	~		|
+
+Miner Productivity= INTEG (
+	change in miner productivity,
+		INITIAL MINER PRODUCTIVITY)
+	~	barrels/person/year
+	~		|
+
+Mining Oil Reserves= INTEG (
+	-mining,
+		INITIAL MINABLE OIL)
+	~	barrels
+	~		|
+
+Mining Workforce= INTEG (
+	hiring or firing miners,
+		INITIAL MINING WORKFORCE)
+	~	people
+	~		|
+
+Pipeline Productivity= INTEG (
+	change in pipeline productivity,
+		INITIAL PIPELINE PRODUCTIVITY)
+	~	barrels/person/year
+	~		|
+
+Pipeline Workforce= INTEG (
+	hiring and firing pipeline workers,
+		INITIAL PIPELINE WORKFORCE)
+	~	people
+	~		|
+
+Rail Productivity= INTEG (
+	change in rail productivity,
+		INITIAL RAIL PRODUCTIVITY)
+	~	barrels/person/year
+	~		|
+
+Rail Workforce= INTEG (
+	hiriing and firing rail workers,
+		INITIAL RAIL WORKFORCE)
+	~	people
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME  = 38
+	~	year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME  = 0
+	~	year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER  = 
+        TIME STEP
+	~	year [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP  = 0.03125
+	~	year [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Oil Extraction
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Mining Oil Reserves,395,254,53,33,3,131,0,0,0,0,0,0
+10,2,Drilling Oil Reserves,395,435,50,35,3,131,0,0,0,0,0,0
+10,3,INITIAL TOTAL OIL RESERVES,-133,331,56,32,8,131,0,0,0,0,0,0
+10,4,INITIAL MINABLE OIL,167,254,53,19,8,3,0,0,0,0,0,0
+10,5,INITIAL DRILLABLE OIL,156,436,60,19,8,3,0,0,0,0,0,0
+1,6,3,4,1,0,0,0,0,64,0,-1--1--1,,1|(-33,261)|
+1,7,3,5,1,0,0,0,0,64,0,-1--1--1,,1|(-94,395)|
+1,8,4,1,1,0,0,0,0,64,1,-1--1--1,,1|(232,241)|
+1,9,5,2,1,0,0,0,0,64,1,-1--1--1,,1|(239,475)|
+10,10,Mining Workforce,609,110,41,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,11,Drilling Workforce,295,330,41,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,12,Miner Productivity,457,104,43,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,13,Driller Productivity,176,624,43,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,14,Extracted Oil,783,342,107,76,3,131,0,0,0,0,0,0
+1,15,17,14,4,0,0,22,0,0,0,-1--1--1,,1|(783,247)|
+1,16,17,1,100,0,0,22,0,0,0,-1--1--1,,1|(483,247)|
+11,17,2732,524,247,6,8,34,3,0,0,1,0,0,0
+10,18,mining,524,266,21,11,40,3,0,0,-1,0,0,0
+1,19,21,14,4,0,0,22,0,0,0,-1--1--1,,1|(783,437)|
+1,20,21,2,100,0,0,22,0,0,0,-1--1--1,,1|(487,437)|
+11,21,636,535,437,6,8,34,3,0,0,1,0,0,0
+10,22,drilling,535,456,22,11,40,3,0,0,-1,0,0,0
+1,23,12,18,1,0,0,0,0,64,0,-1--1--1,,1|(478,144)|
+1,24,10,18,1,0,0,0,0,64,0,-1--1--1,,1|(550,244)|
+1,25,13,22,1,0,0,0,0,64,0,-1--1--1,,1|(300,640)|
+1,26,11,22,1,0,0,0,0,64,0,-1--1--1,,1|(394,343)|
+10,27,Pipeline Productivity,1162,664,43,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,28,Rail Productivity,1266,56,43,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,29,Rail Workforce,930,43,58,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,30,Pipeline Workforce,921,671,41,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+12,31,48,805,131,10,8,0,3,0,0,-1,0,0,0
+1,32,34,31,4,0,0,22,0,0,0,-1--1--1,,1|(805,167)|
+1,33,34,14,100,0,0,22,0,0,0,-1--1--1,,1|(805,237)|
+11,34,48,805,202,8,6,33,3,0,0,4,0,0,0
+10,35,exports rail,849,202,36,11,40,3,0,0,-1,0,0,0
+12,36,48,798,557,10,8,0,3,0,0,-1,0,0,0
+1,37,39,36,4,0,0,22,0,0,0,-1--1--1,,1|(798,519)|
+1,38,39,14,100,0,0,22,0,0,0,-1--1--1,,1|(798,447)|
+11,39,48,798,483,8,6,33,3,0,0,4,0,0,0
+10,40,exports pipeline,856,483,50,11,40,3,0,0,-1,0,0,0
+10,41,extraction,566,341,32,11,8,3,0,0,0,0,0,0
+1,42,18,41,1,0,0,0,0,64,0,-1--1--1,,1|(550,287)|
+1,43,22,41,1,0,0,0,0,64,0,-1--1--1,,1|(565,435)|
+10,44,FRACTION OF OIL MINABLE,77,352,55,19,8,3,0,0,-1,0,0,0
+1,45,44,4,1,0,0,0,0,64,0,-1--1--1,,1|(92,298)|
+1,46,44,5,1,0,0,0,0,64,0,-1--1--1,,1|(77,381)|
+12,47,48,1177,278,10,8,0,3,0,0,-1,0,0,0
+1,48,50,47,4,0,0,22,0,0,0,-1--1--1,,1|(1102,282)|
+1,49,50,14,100,0,0,22,0,0,0,-1--1--1,,1|(957,282)|
+11,50,48,1031,282,6,8,34,3,0,0,1,0,0,0
+10,51,domestic rail,1031,301,40,11,40,3,0,0,-1,0,0,0
+12,52,48,1196,380,10,8,0,3,0,0,-1,0,0,0
+1,53,55,52,4,0,0,22,0,0,0,-1--1--1,,1|(1115,380)|
+1,54,55,14,100,0,0,22,0,0,0,-1--1--1,,1|(961,380)|
+11,55,48,1038,380,6,8,34,3,0,0,1,0,0,0
+10,56,domestic pipeline,1038,399,54,11,40,3,0,0,-1,0,0,0
+10,57,total pipeline,1052,559,40,11,8,3,0,0,0,0,0,0
+1,58,30,57,1,0,0,0,0,64,0,-1--1--1,,1|(983,658)|
+1,59,27,57,1,0,0,0,0,64,0,-1--1--1,,1|(1121,656)|
+1,60,57,40,1,0,0,0,0,64,0,-1--1--1,,1|(975,574)|
+1,61,57,56,1,0,0,0,0,64,0,-1--1--1,,1|(1087,534)|
+10,62,FRACTION DOMESTIC,1280,501,43,19,8,3,0,0,0,0,0,0
+10,63,FRACTION DOMESTIC,708,643,47,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,64,63,40,1,0,0,0,0,64,0,-1--1--1,,1|(756,625)|
+1,65,62,56,1,0,0,0,0,64,0,-1--1--1,,1|(1222,447)|
+10,66,SHIPPING TO DOMESTIC REFINERIES,1445,392,92,22,8,131,0,0,0,0,0,0
+10,67,TOTAL SHIPPING,1376,678,38,19,8,3,0,0,0,0,0,0
+1,68,66,62,1,0,0,0,0,64,0,-1--1--1,,1|(1402,482)|
+1,69,67,62,1,0,0,0,0,64,0,-1--1--1,,1|(1302,650)|
+10,70,FRACTION DOMESTIC,996,128,47,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,71,70,51,1,0,0,0,0,64,0,-1--1--1,,1|(1019,152)|
+1,72,70,35,1,0,0,0,0,64,0,-1--1--1,,1|(904,141)|
+10,73,total rail,1105,86,26,11,8,3,0,0,0,0,0,0
+1,74,29,73,1,0,0,0,0,64,0,-1--1--1,,1|(1002,48)|
+1,75,28,73,1,0,0,0,0,64,0,-1--1--1,,1|(1219,57)|
+1,76,73,35,1,0,0,0,0,64,0,-1--1--1,,1|(969,75)|
+1,77,73,51,1,0,0,0,0,64,0,-1--1--1,,1|(1121,121)|
+10,78,INITIAL EXTRACTED OIL,635,528,64,19,8,3,0,0,-1,0,0,0
+1,79,78,14,0,0,0,0,0,64,1,-1--1--1,,1|(681,468)|
+10,80,domestic shipping,1087,341,56,11,8,3,0,0,0,0,0,0
+1,81,51,80,1,0,0,0,0,64,0,-1--1--1,,1|(1084,316)|
+1,82,56,80,1,0,0,0,0,64,0,-1--1--1,,1|(1079,370)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Workforce
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Drilling Workforce,643,222,55,33,3,131,0,0,0,0,0,0
+10,2,Mining Workforce,644,398,53,30,3,131,0,0,0,0,0,0
+12,3,48,362,219,10,8,0,3,0,0,-1,0,0,0
+1,4,6,1,4,0,0,22,0,0,0,-1--1--1,,1|(537,219)|
+1,5,6,3,100,0,0,22,0,0,0,-1--1--1,,1|(423,219)|
+11,6,48,480,219,6,8,34,3,0,0,1,0,0,0
+10,7,hiring or firing drillers,480,246,44,19,40,3,0,0,-1,0,0,0
+12,8,48,365,396,10,8,0,3,0,0,-1,0,0,0
+1,9,11,2,4,0,0,22,0,0,0,-1--1--1,,1|(540,396)|
+1,10,11,8,100,0,0,22,0,0,0,-1--1--1,,1|(426,396)|
+11,11,48,483,396,6,8,34,3,0,0,1,0,0,0
+10,12,hiring or firing miners,483,423,44,19,40,3,0,0,-1,0,0,0
+10,13,INITIAL DRILLING WORKFORCE,512,134,70,19,8,3,0,0,0,0,0,0
+1,14,13,1,1,0,0,0,0,64,1,-1--1--1,,1|(574,145)|
+10,15,INITIAL MINING WORKFORCE,505,583,63,19,8,3,0,0,0,0,0,0
+1,16,15,2,1,0,0,0,0,64,1,-1--1--1,,1|(583,555)|
+10,17,Rail Workforce,1318,224,44,33,3,131,0,0,0,0,0,0
+10,18,Pipeline Workforce,1330,403,55,35,3,131,0,0,0,0,0,0
+12,19,48,1055,234,10,8,0,3,0,0,-1,0,0,0
+1,20,22,17,4,0,0,22,0,0,0,-1--1--1,,1|(1224,234)|
+1,21,22,19,100,0,0,22,0,0,0,-1--1--1,,1|(1114,234)|
+11,22,48,1169,234,6,8,34,3,0,0,1,0,0,0
+10,23,hiriing and firing rail workers,1169,261,61,19,40,3,0,0,-1,0,0,0
+12,24,48,1063,411,10,8,0,3,0,0,-1,0,0,0
+1,25,27,18,4,0,0,22,0,0,0,-1--1--1,,1|(1227,411)|
+1,26,27,24,100,0,0,22,0,0,0,-1--1--1,,1|(1120,411)|
+11,27,48,1174,411,6,8,34,3,0,0,1,0,0,0
+10,28,hiring and firing pipeline workers,1174,438,53,19,40,3,0,0,-1,0,0,0
+10,29,INITIAL RAIL WORKFORCE,1213,95,53,19,8,3,0,0,0,0,0,0
+10,30,INITIAL PIPELINE WORKFORCE,1285,573,67,19,8,3,0,0,0,0,0,0
+1,31,29,17,1,0,0,0,0,64,1,-1--1--1,,1|(1261,119)|
+1,32,30,18,1,0,0,0,0,64,1,-1--1--1,,1|(1333,544)|
+10,33,LONG TERM DRILLING WORKFORCE,412,37,92,33,8,131,0,0,0,0,0,0
+10,34,desired mining workforce,267,540,67,19,8,3,0,0,0,0,0,0
+10,35,TIME TO HIRE OR FIRE DRILLERS,225,291,67,19,8,3,0,0,0,0,0,0
+10,36,TIME TO HIRE OR FIRE MINERS,218,442,67,19,8,3,0,0,0,0,0,0
+1,37,35,7,1,0,0,0,0,64,0,-1--1--1,,1|(325,307)|
+1,38,1,7,1,0,0,0,0,64,0,-1--1--1,,1|(606,255)|
+1,39,34,12,1,0,0,0,0,64,0,-1--1--1,,1|(348,524)|
+1,40,36,12,1,0,0,0,0,64,0,-1--1--1,,1|(303,461)|
+1,41,2,12,1,0,0,0,0,64,0,-1--1--1,,1|(581,448)|
+10,42,desired rail workforce,961,126,55,19,8,3,0,0,0,0,0,0
+10,43,TIME TO HIRE OR FIRE RAIL WORKERS,947,327,81,19,8,3,0,0,0,0,0,0
+10,44,desired pipeline workers,1024,552,71,19,8,3,0,0,0,0,0,0
+10,45,TIME TO HIRE OR FIRE PIPELINE WORKERS,931,448,92,28,8,131,0,0,0,0,0,0
+1,46,42,23,1,0,0,0,0,64,0,-1--1--1,,1|(978,193)|
+1,47,43,23,1,0,0,0,0,64,0,-1--1--1,,1|(1042,347)|
+1,48,17,23,1,0,0,0,0,64,0,-1--1--1,,1|(1270,287)|
+1,49,44,28,1,0,0,0,0,64,0,-1--1--1,,1|(1090,511)|
+1,50,45,28,1,0,0,0,0,64,0,-1--1--1,,1|(1001,471)|
+1,51,18,28,1,0,0,0,0,64,0,-1--1--1,,1|(1268,459)|
+10,52,total workforce,1782,335,49,11,8,3,0,0,0,0,0,0
+10,53,Drilling Workforce,1607,257,41,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,54,Mining Workforce,1630,376,41,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,55,Rail Workforce,1875,434,58,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,56,Pipeline Workforce,1890,233,41,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,57,53,52,1,0,0,0,0,64,0,-1--1--1,,1|(1631,293)|
+1,58,54,52,1,0,0,0,0,64,0,-1--1--1,,1|(1695,395)|
+1,59,55,52,1,0,0,0,0,64,0,-1--1--1,,1|(1860,391)|
+1,60,56,52,1,0,0,0,0,64,0,-1--1--1,,1|(1885,271)|
+10,61,inital workforce,1743,92,49,11,8,3,0,0,0,0,0,0
+10,62,INITIAL MINING WORKFORCE,1594,36,68,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,63,INITIAL RAIL WORKFORCE,1585,141,58,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,64,INITIAL DRILLING WORKFORCE,1826,169,74,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,65,INITIAL PIPELINE WORKFORCE,1852,25,72,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,66,62,61,1,0,0,0,0,64,0,-1--1--1,,1|(1623,73)|
+1,67,63,61,1,0,0,0,0,64,0,-1--1--1,,1|(1672,154)|
+1,68,64,61,1,0,0,0,0,64,0,-1--1--1,,1|(1800,129)|
+1,69,65,61,1,0,0,0,0,64,0,-1--1--1,,1|(1841,61)|
+10,70,COVID DESIRED WORKFORCE,102,41,62,19,8,3,0,0,0,0,0,0
+10,71,deisred drilling workforce,271,136,46,19,8,3,0,0,0,0,0,0
+1,72,33,71,1,0,0,0,0,64,0,-1--1--1,,1|(323,50)|
+1,73,70,71,1,0,0,0,0,64,0,-1--1--1,,1|(159,56)|
+1,74,71,7,1,0,0,0,0,64,0,-1--1--1,,1|(285,190)|
+10,75,COVD START TIME,109,210,52,19,8,3,0,0,0,0,0,0
+10,76,COVID DURATION,96,147,43,19,8,3,0,0,0,0,0,0
+10,77,Time,238,230,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,78,75,71,1,0,0,0,0,64,0,-1--1--1,,1|(178,168)|
+1,79,76,71,1,0,0,0,0,64,0,-1--1--1,,1|(180,132)|
+1,80,77,71,1,0,0,0,0,64,0,-1--1--1,,1|(230,191)|
+10,81,LONG TERM MINING WORKFORCE,426,650,86,19,8,3,0,0,0,0,0,0
+10,82,COVID DESIRED MINING WORKFORCE,161,650,86,19,8,3,0,0,0,0,0,0
+10,83,COVD START TIME,73,593,56,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,84,COVID DURATION,75,516,48,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,85,Time,120,467,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,86,85,34,1,0,0,0,0,64,0,-1--1--1,,1|(146,499)|
+1,87,84,34,1,0,0,0,0,64,0,-1--1--1,,1|(130,544)|
+1,88,83,34,1,0,0,0,0,64,0,-1--1--1,,1|(132,600)|
+1,89,82,34,1,0,0,0,0,64,0,-1--1--1,,1|(215,621)|
+1,90,81,34,1,0,0,0,0,64,0,-1--1--1,,1|(379,592)|
+10,91,COVID DESIRED RAIL WORKFORCE,1073,44,73,19,8,3,0,0,-1,0,0,0
+1,92,91,42,1,0,0,0,0,64,0,-1--1--1,,1|(994,70)|
+10,93,LONG TERM RAIL WORKFORCE,849,44,68,19,8,3,0,0,-1,0,0,0
+1,94,93,42,1,0,0,0,0,64,0,-1--1--1,,1|(909,67)|
+10,95,Time,783,122,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,96,95,42,1,0,0,0,0,64,0,-1--1--1,,1|(850,100)|
+10,97,COVD START TIME,880,230,56,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,98,COVID DURATION,819,182,48,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,99,97,42,1,0,0,0,0,64,0,-1--1--1,,1|(888,197)|
+1,100,98,42,1,0,0,0,0,64,0,-1--1--1,,1|(859,152)|
+10,101,COVID DESIRED PIPELING WORKFORCE,977,680,62,28,8,3,0,0,-1,0,0,0
+1,102,101,44,1,0,0,0,0,64,0,-1--1--1,,1|(1014,629)|
+10,103,LONG TERM PIPELINE WORKFORCE,1139,672,53,28,8,3,0,0,-1,0,0,0
+1,104,103,44,1,0,0,0,0,64,0,-1--1--1,,1|(1104,593)|
+10,105,Time,871,498,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,106,105,44,1,0,0,0,0,64,0,-1--1--1,,1|(926,531)|
+10,107,COVID DURATION,858,564,48,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,108,COVD START TIME,859,624,56,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,109,107,44,1,0,0,0,0,64,0,-1--1--1,,1|(928,578)|
+1,110,108,44,1,0,0,0,0,64,0,-1--1--1,,1|(933,622)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Productivity
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Miner Productivity,677,241,54,34,3,131,0,0,0,0,0,0
+10,2,Driller Productivity,673,405,54,28,3,131,0,0,0,0,0,0
+12,3,48,439,244,10,8,0,3,0,0,-1,0,0,0
+1,4,6,1,4,0,0,22,0,0,0,-1--1--1,,1|(582,244)|
+1,5,6,3,100,0,0,22,0,0,0,-1--1--1,,1|(489,244)|
+11,6,48,536,244,6,8,34,3,0,0,1,0,0,0
+10,7,change in miner productivity,536,271,49,19,40,3,0,0,-1,0,0,0
+12,8,48,440,407,10,8,0,3,0,0,-1,0,0,0
+1,9,11,2,4,0,0,22,0,0,0,-1--1--1,,1|(579,407)|
+1,10,11,8,100,0,0,22,0,0,0,-1--1--1,,1|(489,407)|
+11,11,48,534,407,6,8,34,3,0,0,1,0,0,0
+10,12,change in driller productivity,534,434,50,19,40,3,0,0,-1,0,0,0
+10,13,INITIAL MINER PRODUCTIVITY,576,140,60,19,8,3,0,0,0,0,0,0
+10,14,INITIAL DRILLER PRODUCTIVITY,561,561,65,19,8,3,0,0,0,0,0,0
+1,15,13,1,1,0,0,0,0,64,1,-1--1--1,,1|(605,199)|
+1,16,14,2,1,0,0,0,0,64,1,-1--1--1,,1|(553,493)|
+10,17,Rail Productivity,1226,236,47,36,3,131,0,0,0,0,0,0
+10,18,Pipeline Productivity,1230,396,57,33,3,131,0,0,0,0,0,0
+12,19,48,984,240,10,8,0,3,0,0,-1,0,0,0
+1,20,22,17,4,0,0,22,0,0,0,-1--1--1,,1|(1135,240)|
+1,21,22,19,100,0,0,22,0,0,0,-1--1--1,,1|(1037,240)|
+11,22,48,1086,240,6,8,34,3,0,0,1,0,0,0
+10,23,change in rail productivity,1086,267,42,19,40,3,0,0,-1,0,0,0
+12,24,48,979,409,10,8,0,3,0,0,-1,0,0,0
+1,25,27,18,4,0,0,22,0,0,0,-1--1--1,,1|(1126,411)|
+1,26,27,24,100,0,0,22,0,0,0,-1--1--1,,1|(1028,411)|
+11,27,48,1074,411,6,8,34,3,0,0,1,0,0,0
+10,28,change in pipeline productivity,1074,438,56,19,40,3,0,0,-1,0,0,0
+10,29,INITIAL RAIL PRODUCTIVITY,1189,118,60,19,8,3,0,0,0,0,0,0
+10,30,INITIAL PIPELINE PRODUCTIVITY,1241,537,67,19,8,3,0,0,0,0,0,0
+1,31,29,17,1,0,0,0,0,64,1,-1--1--1,,1|(1211,143)|
+1,32,30,18,1,0,0,0,0,64,1,-1--1--1,,1|(1220,498)|
+10,33,LONG TERM MINER PRODUCTIVITY,298,165,81,23,8,131,0,0,0,0,0,0
+10,34,TIME TO CHANGE MINER PRODUCTIVITY,279,312,89,19,8,3,0,0,0,0,0,0
+1,35,33,7,1,0,0,0,0,64,0,-1--1--1,,1|(360,248)|
+1,36,34,7,1,0,0,0,0,64,0,-1--1--1,,1|(396,337)|
+1,37,1,7,1,0,0,0,0,64,0,-1--1--1,,1|(625,291)|
+10,38,LONG TERM DRILLER PRODUCTIVITY,262,405,89,23,8,131,0,0,0,0,0,0
+10,39,TIME TO CHANGE DRILLER PRODUCTIVITY,277,544,97,31,8,131,0,0,0,0,0,0
+1,40,38,12,1,0,0,0,0,64,0,-1--1--1,,1|(314,444)|
+1,41,39,12,1,0,0,0,0,64,0,-1--1--1,,1|(376,544)|
+1,42,2,12,1,0,0,0,0,64,0,-1--1--1,,1|(637,461)|
+10,43,LONG TERM RAIL PRODUCTIVITY,899,145,76,23,8,131,0,0,0,0,0,0
+10,44,TIME TO CHANGE RAIL PRODUCTIVITY,855,302,81,19,8,3,0,0,0,0,0,0
+10,45,LONG TERM PIPELINE PRODUCTIVITY,859,449,85,24,8,131,0,0,0,0,0,0
+10,46,TIME TO CHANGE PIPELINE PRODUCTIVITY,863,566,108,34,8,131,0,0,0,0,0,0
+1,47,43,23,1,0,0,0,0,64,0,-1--1--1,,1|(907,184)|
+1,48,44,23,1,0,0,0,0,64,0,-1--1--1,,1|(937,321)|
+1,49,17,23,1,0,0,0,0,64,0,-1--1--1,,1|(1198,292)|
+1,50,45,28,1,0,0,0,0,64,0,-1--1--1,,1|(897,474)|
+1,51,46,28,1,0,0,0,0,64,0,-1--1--1,,1|(961,577)|
+1,52,18,28,1,0,0,0,0,64,0,-1--1--1,,1|(1166,461)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Social
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Infrastructure,784,259,65,40,3,131,0,0,0,0,0,0
+10,2,Services,785,457,64,39,3,131,0,0,0,0,0,0
+12,3,48,517,264,10,8,0,3,0,0,-1,0,0,0
+1,4,6,1,4,0,0,22,0,0,0,-1--1--1,,1|(674,264)|
+1,5,6,3,100,0,0,22,0,0,0,-1--1--1,,1|(572,264)|
+11,6,48,623,264,6,8,34,3,0,0,1,0,0,0
+10,7,building,623,283,25,11,40,3,0,0,-1,0,0,0
+12,8,48,1053,260,10,8,0,3,0,0,-1,0,0,0
+1,9,11,8,4,0,0,22,0,0,0,-1--1--1,,1|(997,260)|
+1,10,11,1,100,0,0,22,0,0,0,-1--1--1,,1|(894,260)|
+11,11,48,946,260,6,8,34,3,0,0,1,0,0,0
+10,12,demolishing,946,279,37,11,40,3,0,0,-1,0,0,0
+10,13,AVERAGE INFRASTRUCTURE LIFE SPAN,1124,344,118,29,8,131,0,0,0,0,0,0
+1,14,13,12,1,0,0,0,0,64,0,-1--1--1,,1|(1001,340)|
+1,15,1,12,1,0,0,0,0,64,0,-1--1--1,,1|(852,315)|
+10,16,infracture build rate,484,364,47,19,8,3,0,0,0,0,0,0
+1,17,16,7,1,0,0,0,0,64,0,-1--1--1,,1|(534,365)|
+1,18,1,7,1,0,0,0,0,64,0,-1--1--1,,1|(763,322)|
+1,19,2,16,1,0,0,0,0,64,0,-1--1--1,,1|(622,423)|
+10,20,DEMAND FOR NEW INFRASTRUCTURE,279,419,75,19,8,3,0,0,0,0,0,0
+10,21,BIRTH RATE,164,99,46,11,8,3,0,0,0,0,0,0
+10,22,NORMAL DEPARTURE TIME,705,72,69,19,8,3,0,0,0,0,0,0
+10,23,First Nations People,345,172,50,26,3,131,0,0,0,0,0,0
+12,24,48,172,167,10,8,0,3,0,0,-1,0,0,0
+1,25,27,23,4,0,0,22,0,0,0,-1--1--1,,1|(269,167)|
+1,26,27,24,100,0,0,22,0,0,0,-1--1--1,,1|(207,167)|
+11,27,48,238,167,6,8,34,3,0,0,1,0,0,0
+10,28,births,238,186,19,11,40,3,0,0,-1,0,0,0
+12,29,48,506,166,10,8,0,3,0,0,-1,0,0,0
+1,30,32,29,4,0,0,22,0,0,0,-1--1--1,,1|(468,166)|
+1,31,32,23,100,0,0,22,0,0,0,-1--1--1,,1|(412,166)|
+11,32,48,435,166,6,8,34,3,0,0,1,0,0,0
+10,33,deaths,435,185,22,11,40,3,0,0,-1,0,0,0
+1,34,21,28,1,0,0,0,0,64,0,-1--1--1,,1|(179,131)|
+1,35,23,28,1,0,0,0,0,64,0,-1--1--1,,1|(288,208)|
+1,36,23,33,1,0,0,0,0,64,0,-1--1--1,,1|(396,214)|
+10,37,total workforce,176,273,58,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,38,total population,370,288,49,11,8,3,0,0,0,0,0,0
+1,39,23,38,1,0,0,0,0,64,0,-1--1--1,,1|(330,212)|
+1,40,37,38,1,0,0,0,0,64,0,-1--1--1,,1|(216,295)|
+10,41,INITIAL FIRST NATIONS PEOPLE,392,90,104,30,8,131,0,0,0,0,0,0
+1,42,41,23,1,0,0,0,0,64,1,-1--1--1,,1|(337,107)|
+10,43,STANDARD USE OF GENERAL SERVICES,344,482,78,19,8,3,0,0,0,0,0,0
+1,44,38,16,1,0,0,0,0,64,0,-1--1--1,,1|(377,325)|
+1,45,43,16,1,0,0,0,0,64,0,-1--1--1,,1|(428,452)|
+1,46,20,16,1,0,0,0,0,64,0,-1--1--1,,1|(388,420)|
+10,47,NORMAL BUILD RATE,231,351,47,19,8,3,0,0,0,0,0,0
+1,48,47,16,1,0,0,0,0,64,0,-1--1--1,,1|(313,374)|
+10,49,INITIAL INFRASTRUCTURE,1012,157,72,19,8,3,0,0,0,0,0,0
+1,50,49,1,1,0,0,0,0,64,1,-1--1--1,,1|(960,229)|
+12,51,48,519,470,10,8,0,3,0,0,-1,0,0,0
+1,52,54,2,4,0,0,22,0,0,0,-1--1--1,,1|(676,470)|
+1,53,54,51,100,0,0,22,0,0,0,-1--1--1,,1|(574,470)|
+11,54,48,625,470,6,8,34,3,0,0,1,0,0,0
+10,55,change in services,625,497,55,19,40,3,0,0,-1,0,0,0
+10,56,TIME TO CHANGE SERVICES,474,610,78,19,8,3,0,0,0,0,0,0
+1,57,56,55,1,0,0,0,0,64,0,-1--1--1,,1|(543,588)|
+1,58,2,55,1,0,0,0,0,64,0,-1--1--1,,1|(750,524)|
+10,59,desired services,356,537,48,19,8,3,0,0,0,0,0,0
+1,60,59,55,1,0,0,0,0,64,0,-1--1--1,,1|(453,559)|
+10,61,INITIAL SERVICES,220,520,69,19,8,3,0,0,0,0,0,0
+1,62,61,2,1,0,0,0,0,64,1,-1--1--1,,1|(393,526)|
+10,63,services density,478,700,50,19,8,3,0,0,0,0,0,0
+10,64,total population,171,706,58,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,65,64,63,1,0,0,0,0,64,0,-1--1--1,,1|(319,747)|
+1,66,2,63,1,0,0,0,0,64,0,-1--1--1,,1|(727,625)|
+10,67,inital total population,151,640,34,19,8,3,0,0,0,0,0,0
+10,68,inital workforce,36,709,58,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,69,INITIAL FIRST NATIONS PEOPLE,66,478,106,30,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,70,69,67,1,0,0,0,0,64,0,-1--1--1,,1|(122,516)|
+1,71,68,67,1,0,0,0,0,64,0,-1--1--1,,1|(70,684)|
+1,72,67,59,1,0,0,0,0,64,0,-1--1--1,,1|(236,642)|
+1,73,61,59,1,0,0,0,0,64,0,-1--1--1,,1|(295,552)|
+1,74,63,59,1,0,0,0,0,64,0,-1--1--1,,1|(393,672)|
+10,75,social well being,1170,491,51,11,8,3,0,0,0,0,0,0
+1,76,2,75,1,0,0,0,0,64,0,-1--1--1,,1|(881,537)|
+10,77,INITIAL SERVICES,1368,419,44,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,78,INITIAL FIRST NATIONS PEOPLE,1376,536,85,29,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,79,First Nations People,1252,638,46,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,80,77,75,1,0,0,0,0,64,0,-1--1--1,,1|(1308,437)|
+10,81,departure time,578,126,46,11,8,3,0,0,0,0,0,0
+10,82,EFFECT OF EMISSIONS ON DEPARTURE TIME,868,121,117,30,8,131,0,0,0,0,0,0
+10,83,emissions,752,168,40,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,84,initial emissions,587,196,48,11,8,3,0,0,0,0,0,0
+1,85,83,84,1,0,0,0,0,64,1,-1--1--1,,1|(704,185)|
+1,86,83,81,1,0,0,0,0,64,0,-1--1--1,,1|(692,160)|
+1,87,84,81,1,0,0,0,0,64,0,-1--1--1,,1|(597,189)|
+1,88,22,81,1,0,0,0,0,64,0,-1--1--1,,1|(622,87)|
+1,89,82,81,1,0,0,0,0,64,0,-1--1--1,,1|(726,109)|
+1,90,81,33,1,0,0,0,0,64,0,-1--1--1,,1|(523,184)|
+1,91,79,75,1,0,0,0,0,64,0,-1--1--1,,1|(1195,589)|
+1,92,78,75,1,0,0,0,0,64,0,-1--1--1,,1|(1269,534)|
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Economic
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,royalities,488,196,29,11,8,3,0,0,0,0,0,0
+10,2,taxes,484,299,18,11,8,3,0,0,0,0,0,0
+10,3,wages,486,450,21,11,8,3,0,0,0,0,0,0
+10,4,economic benefits,678,308,56,11,8,3,0,0,0,0,0,0
+1,5,1,4,1,0,0,0,0,64,0,-1--1--1,,1|(513,224)|
+1,6,2,4,1,0,0,0,0,64,0,-1--1--1,,1|(508,312)|
+1,7,3,4,1,0,0,0,0,64,0,-1--1--1,,1|(541,440)|
+10,8,extraction,289,248,41,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,9,8,1,1,0,0,0,0,64,0,-1--1--1,,1|(363,243)|
+10,10,royal rate,291,113,31,11,8,3,0,0,0,0,0,0
+10,11,tax rate,293,397,25,11,8,3,0,0,0,0,0,0
+1,12,10,1,1,0,0,0,0,64,0,-1--1--1,,1|(314,144)|
+1,13,11,2,1,0,0,0,0,64,0,-1--1--1,,1|(421,384)|
+10,14,total workforce,288,540,58,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,15,14,3,1,0,0,0,0,64,0,-1--1--1,,1|(376,553)|
+10,16,average wage,289,488,44,11,8,3,0,0,0,0,0,0
+1,17,16,3,1,0,0,0,0,64,0,-1--1--1,,1|(359,502)|
+10,18,average price,295,328,48,17,8,131,0,0,0,0,0,0
+10,19,initial economic benefits,658,221,49,19,8,3,0,0,0,0,0,0
+1,20,4,19,1,0,0,0,0,64,1,-1--1--1,,1|(653,288)|
+10,21,economic well being,846,315,73,20,8,131,0,0,0,0,0,0
+1,22,19,21,1,0,0,0,0,64,0,-1--1--1,,1|(678,242)|
+1,23,4,21,1,0,0,0,0,64,0,-1--1--1,,1|(739,331)|
+1,24,18,2,1,0,0,0,0,64,0,-1--1--1,,1|(319,336)|
+1,25,8,2,1,0,0,0,0,64,0,-1--1--1,,1|(342,279)|
+10,26,Time,352,46,26,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+\\\---/// Sketch information - do not modify anything except names
+V300  Do not put anything below this section - it will be ignored
+*Environment
+$192-192-192,0,Times New Roman|12||0-0-0|0-0-0|0-0-255|-1--1--1|-1--1--1|96,96,100,0
+10,1,Land Available,28,-460,43,35,3,131,0,0,0,0,0,0
+10,2,Land Used,280,-459,45,38,3,131,0,0,0,0,0,0
+1,3,5,2,4,0,0,22,0,0,0,-1--1--1,,1|(197,-460)|
+1,4,5,1,100,0,0,22,0,0,0,-1--1--1,,1|(109,-460)|
+11,5,1356,153,-460,6,8,34,3,0,0,1,0,0,0
+10,6,net land use,153,-441,38,11,40,3,0,0,-1,0,0,0
+10,7,mining,-30,-378,30,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,8,drilling,318,-383,31,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,9,LAND USE RATE MINING,65,-324,72,21,8,131,0,0,0,0,0,0
+10,10,LAND USE RATE DRILLING,271,-334,63,19,8,131,0,0,0,0,0,0
+1,11,9,6,1,0,0,0,0,64,0,-1--1--1,,1|(91,-348)|
+1,12,10,6,1,0,0,0,0,64,0,-1--1--1,,1|(208,-364)|
+1,13,8,6,1,0,0,0,0,64,0,-1--1--1,,1|(257,-377)|
+10,14,RECLAMATION RATE,210,-546,77,20,8,131,0,0,0,0,0,0
+1,15,2,6,1,0,0,0,0,64,0,-1--1--1,,1|(222,-482)|
+10,16,INITIAL LAND AVAILABLE,-73,-551,55,19,8,3,0,0,0,0,0,0
+10,17,INITAL LAND USED,381,-547,52,19,8,3,0,0,0,0,0,0
+10,18,mining,523,-381,30,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,19,drilling,850,-369,31,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,20,WATER USE RATE MINING,539,-322,54,19,8,3,0,0,0,0,0,0
+10,21,WATER USE RATE DRILLING,863,-310,69,19,8,131,0,0,0,0,0,0
+10,22,RECYCLING RATE MINING,604,-587,54,19,8,3,0,0,0,0,0,0
+10,23,RECYCLING RATE DRILLING,775,-591,70,19,8,3,0,0,0,0,0,0
+10,24,Emission Rate Mining,295,-177,53,30,3,131,0,0,0,0,0,0
+10,25,Emission Rate Drilling,567,-177,51,31,3,131,0,0,0,0,0,0
+12,26,48,43,-173,10,8,0,3,0,0,-1,0,0,0
+1,27,29,24,4,0,0,22,0,0,0,-1--1--1,,1|(197,-173)|
+1,28,29,26,100,0,0,22,0,0,0,-1--1--1,,1|(97,-173)|
+11,29,48,147,-173,6,8,34,3,0,0,1,0,0,0
+10,30,change in emission rate mining,147,-146,59,19,40,3,0,0,-1,0,0,0
+12,31,48,806,-182,10,8,0,3,0,0,-1,0,0,0
+1,32,34,25,4,0,0,22,0,0,0,-1--1--1,,1|(659,-182)|
+1,33,34,31,100,0,0,22,0,0,0,-1--1--1,,1|(754,-182)|
+11,34,48,707,-182,6,8,34,3,0,0,1,0,0,0
+10,35,change in emission rate drilling,707,-155,59,19,40,3,0,0,-1,0,0,0
+10,36,DESIRED EMISSION RATE MINING,-48,-244,75,19,8,3,0,0,0,0,0,0
+10,37,DESIRED EMISSION RATE DRILLING,935,-252,75,19,8,3,0,0,0,0,0,0
+10,38,TIME TO CHANGE EMISSION RATE MINING,-31,-85,100,30,8,131,0,0,0,0,0,0
+10,39,TIME TO CHANGE EMISSION RATE DRILLING,949,-90,106,34,8,131,0,0,0,0,0,0
+1,40,36,30,1,0,0,0,0,64,0,-1--1--1,,1|(-2,-179)|
+1,41,38,30,1,0,0,0,0,64,0,-1--1--1,,1|(86,-77)|
+1,42,24,30,1,0,0,0,0,64,0,-1--1--1,,1|(273,-132)|
+1,43,25,35,1,0,0,0,0,64,0,-1--1--1,,1|(579,-137)|
+1,44,39,35,1,0,0,0,0,64,0,-1--1--1,,1|(764,-91)|
+1,45,37,35,1,0,0,0,0,64,0,-1--1--1,,1|(866,-180)|
+10,46,INITIAL EMISSION RATE MINING,197,-254,71,19,8,3,0,0,0,0,0,0
+10,47,INITIAL EMISSION RATE DRILLING,678,-265,71,19,8,3,0,0,0,0,0,0
+1,48,46,24,1,0,0,0,0,64,1,-1--1--1,,1|(253,-240)|
+1,49,47,25,1,0,0,0,0,64,1,-1--1--1,,1|(617,-241)|
+10,50,mining,145,-2,30,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,51,drilling,649,-3,31,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,52,emissions,427,-52,31,11,8,3,0,0,0,0,0,0
+1,53,24,52,1,0,0,0,0,64,0,-1--1--1,,1|(319,-102)|
+1,54,50,52,1,0,0,0,0,64,0,-1--1--1,,1|(249,23)|
+1,55,25,52,1,0,0,0,0,64,0,-1--1--1,,1|(552,-119)|
+1,56,51,52,1,0,0,0,0,64,0,-1--1--1,,1|(576,13)|
+1,57,16,1,1,0,0,0,0,64,1,-1--1--1,,1|(-42,-537)|
+1,58,17,2,1,0,0,0,0,64,1,-1--1--1,,1|(330,-523)|
+1,59,7,6,1,0,0,0,0,64,0,-1--1--1,,1|(38,-377)|
+1,60,14,6,1,0,0,0,0,64,0,-1--1--1,,1|(160,-517)|
+10,61,Wildlife,77,184,54,30,3,131,0,0,0,0,0,0
+10,62,Fish,997,140,50,30,3,131,0,0,0,0,0,0
+12,63,48,-146,185,10,8,0,3,0,0,-1,0,0,0
+1,64,66,61,4,0,0,22,0,0,0,-1--1--1,,1|(-14,185)|
+1,65,66,63,100,0,0,22,0,0,0,-1--1--1,,1|(-99,185)|
+11,66,48,-57,185,6,8,34,3,0,0,1,0,0,0
+10,67,wildlife births,-57,204,42,11,40,3,0,0,-1,0,0,0
+12,68,48,304,183,10,8,0,3,0,0,-1,0,0,0
+1,69,71,68,4,0,0,22,0,0,0,-1--1--1,,1|(256,183)|
+1,70,71,61,100,0,0,22,0,0,0,-1--1--1,,1|(168,183)|
+11,71,48,212,183,6,8,34,3,0,0,1,0,0,0
+10,72,wildlife deaths,212,202,45,11,40,3,0,0,-1,0,0,0
+12,73,48,769,143,10,8,0,3,0,0,-1,0,0,0
+1,74,76,62,4,0,0,22,0,0,0,-1--1--1,,1|(908,143)|
+1,75,76,73,100,0,0,22,0,0,0,-1--1--1,,1|(818,143)|
+11,76,48,863,143,6,8,34,3,0,0,1,0,0,0
+10,77,fish births,863,162,31,11,40,3,0,0,-1,0,0,0
+12,78,48,1219,138,10,8,0,3,0,0,-1,0,0,0
+1,79,81,78,4,0,0,22,0,0,0,-1--1--1,,1|(1171,138)|
+1,80,81,62,100,0,0,22,0,0,0,-1--1--1,,1|(1084,138)|
+11,81,48,1128,138,6,8,34,3,0,0,1,0,0,0
+10,82,fish deaths,1128,157,34,11,40,3,0,0,-1,0,0,0
+12,83,48,74,331,10,8,0,3,0,0,-1,0,0,0
+1,84,86,83,4,0,0,22,0,0,0,-1--1--1,,1|(74,298)|
+1,85,86,61,100,0,0,22,0,0,0,-1--1--1,,1|(74,238)|
+11,86,48,74,268,8,6,33,3,0,0,4,0,0,0
+10,87,hunting,105,268,23,11,40,3,0,0,-1,0,0,0
+12,88,48,998,291,10,8,0,3,0,0,-1,0,0,0
+1,89,91,88,4,0,0,22,0,0,0,-1--1--1,,1|(998,257)|
+1,90,91,62,100,0,0,22,0,0,0,-1--1--1,,1|(998,195)|
+11,91,48,998,226,8,6,33,3,0,0,4,0,0,0
+10,92,fishing,1027,226,21,11,40,3,0,0,-1,0,0,0
+10,93,wildlife life expectancy,370,240,57,19,8,3,0,0,0,0,0,0
+10,94,fish life expectancy,1251,204,55,19,8,3,0,0,0,0,0,0
+10,95,WILDLIFE BIRTH RATE,-179,110,47,19,8,3,0,0,0,0,0,0
+10,96,FISH BIRTH RATE,759,84,44,19,8,3,0,0,0,0,0,0
+10,97,EFFECT OF WATER AVAILABLE ON FISH LIFE EXPECTANCE,1435,282,129,30,8,131,0,0,0,0,0,0
+10,98,EFFECT OF LAND AVAILABLE ON WILDLIFE LIFE EXPECTANCY,567,344,141,32,8,131,0,0,0,0,0,0
+10,99,HUNTING RATE,-66,350,59,11,8,3,0,0,0,0,0,0
+10,100,FISHING RATE,829,317,55,11,8,3,0,0,0,0,0,0
+1,101,61,87,1,0,0,0,0,64,0,-1--1--1,,1|(122,246)|
+1,102,99,87,1,0,0,0,0,64,0,-1--1--1,,1|(-7,353)|
+1,103,95,67,1,0,0,0,0,64,0,-1--1--1,,1|(-163,156)|
+1,104,61,67,1,0,0,0,0,64,0,-1--1--1,,1|(42,231)|
+1,105,100,92,1,0,0,0,0,64,0,-1--1--1,,1|(907,306)|
+1,106,62,92,1,0,0,0,0,64,0,-1--1--1,,1|(1028,177)|
+1,107,62,77,1,0,0,0,0,64,0,-1--1--1,,1|(953,189)|
+1,108,96,77,1,0,0,0,0,64,0,-1--1--1,,1|(797,166)|
+1,109,94,82,1,0,0,0,0,64,0,-1--1--1,,1|(1160,219)|
+1,110,62,82,1,0,0,0,0,64,0,-1--1--1,,1|(1065,178)|
+1,111,93,72,1,0,0,0,0,64,0,-1--1--1,,1|(318,266)|
+1,112,61,72,1,0,0,0,0,64,0,-1--1--1,,1|(161,215)|
+10,113,INITIAL WILDLIFE,399,679,39,19,8,3,0,0,0,0,0,0
+10,114,INITIAL FISH,850,683,41,20,8,131,0,0,0,0,0,0
+1,115,113,61,1,0,0,0,0,64,1,-1--1--1,,1|(12,471)|
+1,116,114,62,1,0,0,0,0,64,1,-1--1--1,,1|(556,176)|
+10,117,NORMAL WILDLIFE LIFE EXPECTANCY,501,160,76,19,8,3,0,0,0,0,0,0
+10,118,Land Available,305,100,57,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,119,INITIAL LAND AVAILABLE,319,347,59,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,120,117,93,1,0,0,0,0,64,0,-1--1--1,,1|(457,247)|
+1,121,98,93,1,0,0,0,0,64,0,-1--1--1,,1|(446,322)|
+10,122,NORMAL FISH LIFE EXPECTANCY,1381,109,75,19,8,3,0,0,0,0,0,0
+1,123,122,94,1,0,0,0,0,64,0,-1--1--1,,1|(1352,144)|
+1,124,97,94,1,0,0,0,0,64,0,-1--1--1,,1|(1332,216)|
+10,125,Water Available,527,-458,58,37,3,131,0,0,0,0,0,0
+10,126,Water Used,856,-462,55,33,3,131,0,0,0,0,0,0
+1,127,129,126,4,0,0,22,0,0,0,-1--1--1,,1|(744,-456)|
+1,128,129,125,100,0,0,22,0,0,0,-1--1--1,,1|(630,-456)|
+11,129,1724,682,-456,6,8,34,3,0,0,1,0,0,0
+10,130,net water use,682,-437,42,11,40,3,0,0,-1,0,0,0
+10,131,INITIAL WATER AVAILABLE,435,-591,60,19,8,3,0,0,0,0,0,0
+10,132,INITIAL WATER USED,970,-575,60,19,8,3,0,0,0,0,0,0
+1,133,131,125,1,0,0,0,0,64,1,-1--1--1,,1|(482,-547)|
+1,134,132,126,1,0,0,0,0,64,1,-1--1--1,,1|(934,-555)|
+1,135,22,130,1,0,0,0,0,64,0,-1--1--1,,1|(637,-541)|
+1,136,23,130,1,0,0,0,0,64,0,-1--1--1,,1|(752,-559)|
+1,137,18,130,1,0,0,0,0,64,0,-1--1--1,,1|(583,-385)|
+1,138,20,130,1,0,0,0,0,64,0,-1--1--1,,1|(613,-337)|
+1,139,21,130,1,0,0,0,0,64,0,-1--1--1,,1|(768,-341)|
+1,140,19,130,1,0,0,0,0,64,0,-1--1--1,,1|(789,-379)|
+10,141,INITIAL WATER AVAILABLE,1173,358,65,19,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,142,Water Available,1194,74,65,25,8,130,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,143,118,93,1,0,0,0,0,64,0,-1--1--1,,1|(340,146)|
+1,144,119,93,1,0,0,0,0,64,0,-1--1--1,,1|(349,307)|
+1,145,142,94,1,0,0,0,0,64,0,-1--1--1,,1|(1234,102)|
+1,146,141,94,1,0,0,0,0,64,0,-1--1--1,,1|(1221,323)|
+10,147,environmental well being,594,621,59,19,8,3,0,0,0,0,0,0
+10,148,emissions,488,532,40,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+10,149,initial emissions,674,532,57,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,150,148,147,1,0,0,0,0,64,0,-1--1--1,,1|(515,546)|
+1,151,149,147,1,0,0,0,0,64,0,-1--1--1,,1|(630,548)|
+10,152,Wildlife,327,618,34,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,153,113,147,1,0,0,0,0,64,0,-1--1--1,,1|(517,623)|
+1,154,152,147,1,0,0,0,0,64,0,-1--1--1,,1|(425,594)|
+10,155,Fish,838,606,24,11,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|12||128-128-128
+1,156,155,147,1,0,0,0,0,64,0,-1--1--1,,1|(761,582)|
+1,157,114,147,1,0,0,0,0,64,0,-1--1--1,,1|(787,630)|
+///---\\\
+:GRAPH wokrforce
+:TITLE total workforce
+:Y-DIV 3
+:SCALE
+:VAR total workforce
+:Y-MIN 0
+:Y-MAX 150000
+:DATASET Baseline No COVID Shock
+:VAR total workforce
+:DATASET COVID Shock - Quick Recovery
+:VAR total workforce
+:DATASET COVID Shock - Slow Recovery
+
+:GRAPH First_Nations_People
+:TITLE First Nations People
+:Y-DIV 3
+:SCALE
+:VAR First Nations People
+:Y-MIN 0
+:Y-MAX 15000
+:DATASET Baseline No COVID Shock
+:VAR First Nations People
+:DATASET COVID Shock - Quick Recovery
+:VAR First Nations People
+:DATASET COVID Shock - Slow Recovery
+
+:GRAPH social_well_being
+:TITLE social well being
+:Y-DIV 5
+:SCALE
+:VAR social well being
+:Y-MIN 0
+:Y-MAX 2.5
+:DATASET Baseline No COVID Shock
+:VAR social well being
+:DATASET COVID Shock - Quick Recovery
+:VAR social well being
+:DATASET COVID Shock - Slow Recovery
+
+:GRAPH economic_well_being
+:TITLE economic well being
+:Y-DIV 5
+:SCALE
+:VAR economic well being
+:Y-MIN 0
+:Y-MAX 2.5
+:DATASET Baseline No COVID Shock
+:VAR economic well being
+:DATASET COVID Shock - Quick Recovery
+:VAR economic well being
+:DATASET COVID Shock - Slow Recovery
+
+:GRAPH environmental_well_being
+:TITLE environmental well being
+:Y-DIV 5
+:SCALE
+:VAR environmental well being
+:Y-MIN 0
+:Y-MAX 2.5
+:DATASET Baseline No COVID Shock
+:VAR environmental well being
+:DATASET COVID Shock - Quick Recovery
+:VAR environmental well being
+:DATASET COVID Shock - Slow Recovery
+:L<%^E!@
+1:Baseline No COVID Shock.vdf
+1:COVID Shock - Quick Recovery.vdf
+1:COVID Shock - Slow Recovery.vdf
+9:Baseline No COVID Shock
+22:$,Dollar,Dollars,$s
+22:Day,Days
+22:Hour,Hours
+22:Month,Months
+22:Person,People,Persons
+22:Unit,Units
+22:Week,Weeks
+22:Year,Years
+15:0,0,0,0,0,0
+19:100,4
+27:2,
+34:0,
+4:Time
+5:environmental well being
+35:Date
+36:YYYY
+37:2012
+38:1
+39:1
+40:0
+41:1
+24:0
+25:38
+26:38
